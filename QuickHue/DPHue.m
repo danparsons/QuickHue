@@ -19,6 +19,7 @@
 @property (nonatomic, strong, readwrite) NSString *ip;
 @property (nonatomic, strong, readwrite) NSString *swversion;
 @property (nonatomic, strong, readwrite) NSArray *lights;
+@property (nonatomic, readwrite) BOOL authenticated;
 
 @end
 
@@ -28,6 +29,7 @@
     self = [super init];
     if (self) {
         self.deviceType = @"test1";
+        self.authenticated = NO;
         self.username = @"3c24efdac3d8a40baeda32579444743f";
         self.ip = ip;
         self.getURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/api/%@", ip, self.username]];
@@ -82,7 +84,16 @@
 #pragma mark - DPJSONSerializable
 
 - (void)readFromJSONDictionary:(id) d {
+    if (![d respondsToSelector:@selector(objectForKeyedSubscript:)]) {
+        // We were given an array, not a dict, which means
+        // Hue is giving us a result array, which (in this case)
+        // means error: not authenticated
+        self->_authenticated = NO;
+        return;
+    }
     self->_name = d[@"config"][@"name"];
+    if (self->_name)
+        self->_authenticated = YES;
     self->_swversion = d[@"config"][@"swversion"];
     NSMutableArray *tmpLights = [[NSMutableArray alloc] init];
     for (NSDictionary *lightDict in d[@"lights"]) {

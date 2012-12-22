@@ -10,7 +10,7 @@
 		373B600F1682D7D700E07569 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 373B600E1682D7D700E07569 /* Cocoa.framework */; };
 		373B60191682D7D700E07569 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 373B60171682D7D700E07569 /* InfoPlist.strings */; };
 		373B601B1682D7D700E07569 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 373B601A1682D7D700E07569 /* main.m */; };
-		373B60221682D7D700E07569 /* DPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 373B60211682D7D700E07569 /* DPAppDelegate.m */; };
+		373B60221682D7D700E07569 /* DPQuickHueAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 373B60211682D7D700E07569 /* DPQuickHueAppDelegate.m */; };
 		373B60321682DD7B00E07569 /* hue-logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 373B60311682DD7B00E07569 /* hue-logo@2x.png */; };
 		373B60341682DF0500E07569 /* hue-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 373B60331682DF0500E07569 /* hue-logo.png */; };
 		373B60361682E1FB00E07569 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 373B60351682E1FB00E07569 /* MainMenu.xib */; };
@@ -20,7 +20,7 @@
 		373B60441682E43900E07569 /* DPQuickHuePreset.m in Sources */ = {isa = PBXBuildFile; fileRef = 373B60431682E43900E07569 /* DPQuickHuePreset.m */; };
 		373B60531682F93C00E07569 /* DPQuickHuePresetStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 373B60521682F93C00E07569 /* DPQuickHuePresetStore.m */; };
 		373B60621685175A00E07569 /* DPHueDiscover.m in Sources */ = {isa = PBXBuildFile; fileRef = 373B60611685175A00E07569 /* DPHueDiscover.m */; };
-		373B607916855A6800E07569 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 373B607816855A6700E07569 /* Podfile */; };
+		373B607F16855FE100E07569 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 373B607E16855FE100E07569 /* NSString+MD5.m */; };
 		B37641F120034CF093C8E105 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A22B7CA18F1463E9D41C163 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -35,8 +35,8 @@
 		373B60181682D7D700E07569 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		373B601A1682D7D700E07569 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		373B601C1682D7D700E07569 /* QuickHue-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QuickHue-Prefix.pch"; sourceTree = "<group>"; };
-		373B60201682D7D700E07569 /* DPAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DPAppDelegate.h; sourceTree = "<group>"; };
-		373B60211682D7D700E07569 /* DPAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DPAppDelegate.m; sourceTree = "<group>"; };
+		373B60201682D7D700E07569 /* DPQuickHueAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DPQuickHueAppDelegate.h; sourceTree = "<group>"; };
+		373B60211682D7D700E07569 /* DPQuickHueAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DPQuickHueAppDelegate.m; sourceTree = "<group>"; };
 		373B60311682DD7B00E07569 /* hue-logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hue-logo@2x.png"; sourceTree = "<group>"; };
 		373B60331682DF0500E07569 /* hue-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hue-logo.png"; sourceTree = "<group>"; };
 		373B60351682E1FB00E07569 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
@@ -54,7 +54,8 @@
 		373B60521682F93C00E07569 /* DPQuickHuePresetStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPQuickHuePresetStore.m; sourceTree = "<group>"; };
 		373B60601685175A00E07569 /* DPHueDiscover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPHueDiscover.h; sourceTree = "<group>"; };
 		373B60611685175A00E07569 /* DPHueDiscover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPHueDiscover.m; sourceTree = "<group>"; };
-		373B607816855A6700E07569 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; };
+		373B607D16855FE100E07569 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
+		373B607E16855FE100E07569 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
 		3B24891D14964C2EA2C1683E /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -111,13 +112,11 @@
 		373B60141682D7D700E07569 /* QuickHue */ = {
 			isa = PBXGroup;
 			children = (
-				3B24891D14964C2EA2C1683E /* Pods.xcconfig */,
-				373B607816855A6700E07569 /* Podfile */,
 				373B60631685176800E07569 /* DPHue */,
 				373B60331682DF0500E07569 /* hue-logo.png */,
 				373B60311682DD7B00E07569 /* hue-logo@2x.png */,
-				373B60201682D7D700E07569 /* DPAppDelegate.h */,
-				373B60211682D7D700E07569 /* DPAppDelegate.m */,
+				373B60201682D7D700E07569 /* DPQuickHueAppDelegate.h */,
+				373B60211682D7D700E07569 /* DPQuickHueAppDelegate.m */,
 				373B60351682E1FB00E07569 /* MainMenu.xib */,
 				373B60511682F93C00E07569 /* DPQuickHuePresetStore.h */,
 				373B60521682F93C00E07569 /* DPQuickHuePresetStore.m */,
@@ -132,6 +131,7 @@
 		373B60151682D7D700E07569 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3B24891D14964C2EA2C1683E /* Pods.xcconfig */,
 				373B60161682D7D700E07569 /* QuickHue-Info.plist */,
 				373B60171682D7D700E07569 /* InfoPlist.strings */,
 				373B601A1682D7D700E07569 /* main.m */,
@@ -143,6 +143,8 @@
 		373B60631685176800E07569 /* DPHue */ = {
 			isa = PBXGroup;
 			children = (
+				373B607D16855FE100E07569 /* NSString+MD5.h */,
+				373B607E16855FE100E07569 /* NSString+MD5.m */,
 				373B603B1682E41200E07569 /* DPJSONConnection.h */,
 				373B603C1682E41200E07569 /* DPJSONConnection.m */,
 				373B603D1682E41200E07569 /* DPJSONSerializable.h */,
@@ -213,7 +215,6 @@
 				373B60321682DD7B00E07569 /* hue-logo@2x.png in Resources */,
 				373B60341682DF0500E07569 /* hue-logo.png in Resources */,
 				373B60361682E1FB00E07569 /* MainMenu.xib in Resources */,
-				373B607916855A6800E07569 /* Podfile in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,13 +243,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				373B601B1682D7D700E07569 /* main.m in Sources */,
-				373B60221682D7D700E07569 /* DPAppDelegate.m in Sources */,
+				373B60221682D7D700E07569 /* DPQuickHueAppDelegate.m in Sources */,
 				373B603F1682E41300E07569 /* DPHue.m in Sources */,
 				373B60401682E41300E07569 /* DPHueLight.m in Sources */,
 				373B60411682E41300E07569 /* DPJSONConnection.m in Sources */,
 				373B60441682E43900E07569 /* DPQuickHuePreset.m in Sources */,
 				373B60531682F93C00E07569 /* DPQuickHuePresetStore.m in Sources */,
 				373B60621685175A00E07569 /* DPHueDiscover.m in Sources */,
+				373B607F16855FE100E07569 /* NSString+MD5.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

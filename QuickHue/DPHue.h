@@ -19,6 +19,7 @@
 @property (nonatomic, strong, readonly) NSString *ip;
 @property (nonatomic, strong, readonly) NSString *swversion;
 @property (nonatomic, strong, readonly) NSArray *lights;
+@property (nonatomic, readonly) BOOL authenticated;
 
 + (NSString *)generateUsername; // hash of hostname
 
