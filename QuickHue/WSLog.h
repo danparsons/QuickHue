@@ -1,6 +1,6 @@
 //
 //  WSLog.h
-//  Nerdfeed
+//  QuickHue
 //
 //  Created by Dan Parsons on 12/16/12.
 //  Copyright (c) 2012 Dan Parsons. All rights reserved.

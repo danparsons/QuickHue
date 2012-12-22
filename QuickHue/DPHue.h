@@ -1,6 +1,6 @@
 //
 //  DPHue.h
-//  HueProto
+//  QuickHue
 //
 //  Created by Dan Parsons on 12/19/12.
 //  Copyright (c) 2012 Dan Parsons. All rights reserved.

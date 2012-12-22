@@ -67,7 +67,7 @@ NSString *const QuickHueHostPrefKey = @"QuickHueHostPrefKey";
     NSString *host = timer.userInfo;
     NSLog(@"PING! %@", host);
     DPHue *someHue = [[DPHue alloc] initWithHueControllerIP:host];
-    someHue.username = [[NSUserDefaults standardUserDefaults] objectForKey:QuickHueAPIUsernamePrefKey]; 
+    someHue.username = [[NSUserDefaults standardUserDefaults] objectForKey:QuickHueAPIUsernamePrefKey];
     [someHue readWithCompletion:^(DPHue *hue, NSError *err) {
         if (hue.authenticated) {
             [self.timer invalidate];
