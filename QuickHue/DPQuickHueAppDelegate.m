@@ -6,26 +6,37 @@
 //  Copyright (c) 2012 Dan Parsons. All rights reserved.
 //
 
-#import "DPAppDelegate.h"
+#import "DPQuickHueAppDelegate.h"
 #import "DPQuickHuePresetStore.h"
 #import "DPQuickHuePreset.h"
 #import "DPHue.h"
 #import "DPHueDiscover.h"
 
-@interface DPAppDelegate ()
+@interface DPQuickHueAppDelegate ()
 @property (nonatomic, strong) NSStatusItem *statusBar;
 @property (nonatomic, strong) NSMenu *statusBarMenu;
 @property (nonatomic, strong) DPHueDiscover *dhd;
 @end
 
+NSString *const QuickHueAPIUsernamePrefKey = @"QuickHueAPIUsernamePrefKey";
 
-@implementation DPAppDelegate
+@implementation DPQuickHueAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     self.statusBar = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
     self.statusBar.image = [NSImage imageNamed:@"hue-logo"];
     self.statusBar.highlightMode = YES;
     [self buildMenu];
+    
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    if (![prefs objectForKey:QuickHueAPIUsernamePrefKey]) {
+        // No API username found in user prefs, generate one
+        NSString *newUsername = [DPHue generateUsername];
+        [prefs setObject:newUsername forKey:QuickHueAPIUsernamePrefKey];
+        [prefs synchronize];
+        WSLog(@"No API username found; generated %@", [prefs objectForKey:QuickHueAPIUsernamePrefKey]);
+    }
+    WSLog(@"Username: %@", [DPHue generateUsername]);
 }
 
 - (void)buildMenu {
@@ -83,7 +94,15 @@
 }
 
 - (void)preferences {
-    
+    // temporarily using this for testing stuff
+    DPHue *someHue = [[DPHue alloc] initWithHueControllerIP:@"192.168.0.25"];
+    NSString *hueAPIUsername = [[NSUserDefaults standardUserDefaults] objectForKey:QuickHueAPIUsernamePrefKey];
+    NSLog(@"%@", hueAPIUsername);
+    //[[NSUserDefaults standardUserDefaults] setObject:@"foo" forKey:@"hueAPIUsername"];
+    //[[NSUserDefaults standardUserDefaults] synchronize];
+    [someHue readWithCompletion:^(DPHue *hue, NSError *err) {
+        NSLog(@"Authenticated: %d", hue.authenticated);
+    }];
 }
 
 #pragma mark - DPHueDiscoverDelegate

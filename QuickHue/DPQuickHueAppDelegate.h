@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "DPHueDiscover.h"
 
-@interface DPAppDelegate : NSObject <NSApplicationDelegate, DPHueDiscoverDelegate>
+@interface DPQuickHueAppDelegate : NSObject <NSApplicationDelegate, DPHueDiscoverDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
 
