@@ -10,7 +10,6 @@
 		373B600F1682D7D700E07569 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 373B600E1682D7D700E07569 /* Cocoa.framework */; };
 		373B60191682D7D700E07569 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 373B60171682D7D700E07569 /* InfoPlist.strings */; };
 		373B601B1682D7D700E07569 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 373B601A1682D7D700E07569 /* main.m */; };
-		373B601F1682D7D700E07569 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 373B601D1682D7D700E07569 /* Credits.rtf */; };
 		373B60221682D7D700E07569 /* DPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 373B60211682D7D700E07569 /* DPAppDelegate.m */; };
 		373B60321682DD7B00E07569 /* hue-logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 373B60311682DD7B00E07569 /* hue-logo@2x.png */; };
 		373B60341682DF0500E07569 /* hue-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 373B60331682DF0500E07569 /* hue-logo.png */; };
@@ -36,7 +35,6 @@
 		373B60181682D7D700E07569 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		373B601A1682D7D700E07569 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		373B601C1682D7D700E07569 /* QuickHue-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QuickHue-Prefix.pch"; sourceTree = "<group>"; };
-		373B601E1682D7D700E07569 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		373B60201682D7D700E07569 /* DPAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DPAppDelegate.h; sourceTree = "<group>"; };
 		373B60211682D7D700E07569 /* DPAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DPAppDelegate.m; sourceTree = "<group>"; };
 		373B60311682DD7B00E07569 /* hue-logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hue-logo@2x.png"; sourceTree = "<group>"; };
@@ -138,7 +136,6 @@
 				373B60171682D7D700E07569 /* InfoPlist.strings */,
 				373B601A1682D7D700E07569 /* main.m */,
 				373B601C1682D7D700E07569 /* QuickHue-Prefix.pch */,
-				373B601D1682D7D700E07569 /* Credits.rtf */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -213,7 +210,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				373B60191682D7D700E07569 /* InfoPlist.strings in Resources */,
-				373B601F1682D7D700E07569 /* Credits.rtf in Resources */,
 				373B60321682DD7B00E07569 /* hue-logo@2x.png in Resources */,
 				373B60341682DF0500E07569 /* hue-logo.png in Resources */,
 				373B60361682E1FB00E07569 /* MainMenu.xib in Resources */,
@@ -265,14 +261,6 @@
 				373B60181682D7D700E07569 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		373B601D1682D7D700E07569 /* Credits.rtf */ = {
-			isa = PBXVariantGroup;
-			children = (
-				373B601E1682D7D700E07569 /* en */,
-			);
-			name = Credits.rtf;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
