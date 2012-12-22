@@ -20,7 +20,8 @@
 @property (nonatomic, strong) DPHueDiscover *dhd;
 @end
 
-extern NSString *const QuickHueAPIUsernamePrefKey;
+extern NSString * const QuickHueAPIUsernamePrefKey;
+extern NSString * const QuickHueHostPrefKey;
 
 @implementation DPQuickHueAppDelegate
 
@@ -54,11 +55,8 @@ extern NSString *const QuickHueAPIUsernamePrefKey;
     NSMenuItem *separatorItem = [NSMenuItem separatorItem];
     [self.statusBarMenu addItem:separatorItem];
     
-    NSMenuItem *discoverItem = [[NSMenuItem alloc] initWithTitle:@"Discover" action:@selector(discover) keyEquivalent:@""];
-    [self.statusBarMenu addItem:discoverItem];
-    
-    NSMenuItem *stopDiscoveryItem = [[NSMenuItem alloc] initWithTitle:@"Stop Discovery" action:@selector(stopDiscovery) keyEquivalent:@""];
-    [self.statusBarMenu addItem:stopDiscoveryItem];
+    NSMenuItem *debug1 = [[NSMenuItem alloc] initWithTitle:@"Debug1" action:@selector(debug1) keyEquivalent:@""];
+    [self.statusBarMenu addItem:debug1];
     
     NSMenuItem *makePresetItem = [[NSMenuItem alloc] initWithTitle:@"Make Preset" action:@selector(makePreset) keyEquivalent:@""];
     [self.statusBarMenu addItem:makePresetItem];
@@ -80,21 +78,12 @@ extern NSString *const QuickHueAPIUsernamePrefKey;
     DPQuickHuePresetStore *presetStore = [DPQuickHuePresetStore sharedStore];
     DPQuickHuePreset *preset = [presetStore createPreset];
     preset.name = @"Some Preset";
-    preset.hue = [[DPHue alloc] initWithHueControllerIP:@"192.168.0.25"];
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    preset.hue = [[DPHue alloc] initWithHueIP:[prefs objectForKey:QuickHueHostPrefKey] username:[prefs objectForKey:QuickHueAPIUsernamePrefKey]];
     [preset.hue readWithCompletion:^(DPHue *hue, NSError *err) {
         [presetStore save];
         [self buildMenu];
     }];
-}
-
-- (void)discover {
-    self.dhd = [[DPHueDiscover alloc] initWithDelegate:self];
-    [self.dhd discover];
-}
-
-- (void)stopDiscovery {
-    [self.dhd stopDiscovery];
-    self.dhd = nil;
 }
 
 - (void)preferences {
@@ -110,6 +99,10 @@ extern NSString *const QuickHueAPIUsernamePrefKey;
     }];
      */
     [self.pvc.view.window makeKeyAndOrderFront:self];
+}
+
+- (void)debug1 {
+    //DPHue *someHue = [[DPHue alloc] initWith]
 }
 
 #pragma mark - DPHueDiscoverDelegate

@@ -23,7 +23,7 @@
 
 + (NSString *)generateUsername; // hash of hostname
 
-- (id)initWithHueControllerIP:(NSString *)ip;
+- (id)initWithHueIP:(NSString *)ip username:(NSString *)username;
 - (void)readWithCompletion:(void (^)(DPHue *hue, NSError *err))block;
 - (void)registerUsername;
 - (void)allLightsOff;

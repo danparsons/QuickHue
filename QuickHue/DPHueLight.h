@@ -21,8 +21,11 @@
 @property (nonatomic, strong) NSArray *xy; // CIE 1931 color coordinates
 @property (nonatomic, strong, readonly) NSString *swversion;
 @property (nonatomic, strong, readonly) NSString *type;
-@property (nonatomic, strong) NSURL *getURL;
-@property (nonatomic, strong) NSURL *putURL;
+@property (nonatomic, strong, readonly) NSURL *getURL;
+@property (nonatomic, strong, readonly) NSURL *putURL;
+@property (nonatomic, strong) NSNumber *number;
+@property (nonatomic, strong) NSString *username;
+@property (nonatomic, strong) NSString *host;
 @property (nonatomic, strong, readonly) NSString *modelid;
 @property (nonatomic, strong) NSNumber *colorTemperature; // in mireds 154-500
 @property (nonatomic, strong) NSNumber *transitionTime; // if 0, instant changes

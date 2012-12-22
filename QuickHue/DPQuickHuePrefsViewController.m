@@ -65,9 +65,8 @@ NSString *const QuickHueHostPrefKey = @"QuickHueHostPrefKey";
 
 - (void)createUsernameAt:(NSTimer *)timer {
     NSString *host = timer.userInfo;
-    NSLog(@"PING! %@", host);
-    DPHue *someHue = [[DPHue alloc] initWithHueControllerIP:host];
-    someHue.username = [[NSUserDefaults standardUserDefaults] objectForKey:QuickHueAPIUsernamePrefKey];
+    WSLog(@"Attempting to create username at %@", host);
+    DPHue *someHue = [[DPHue alloc] initWithHueIP:host username:[[NSUserDefaults standardUserDefaults] objectForKey:QuickHueAPIUsernamePrefKey]];
     [someHue readWithCompletion:^(DPHue *hue, NSError *err) {
         if (hue.authenticated) {
             [self.timer invalidate];
@@ -88,8 +87,7 @@ NSString *const QuickHueHostPrefKey = @"QuickHueHostPrefKey";
     [self.discoveryProgressIndicator startAnimation:self];
     [self.discoverySaveButton setEnabled:NO];
     self.discoveryStatusLabel.stringValue = @"Hue Found! Authenticating...";
-    DPHue *someHue = [[DPHue alloc] initWithHueControllerIP:host];
-    someHue.username = [[NSUserDefaults standardUserDefaults] objectForKey:QuickHueAPIUsernamePrefKey];
+    DPHue *someHue = [[DPHue alloc] initWithHueIP:host username:[[NSUserDefaults standardUserDefaults] objectForKey:QuickHueAPIUsernamePrefKey]];
     [someHue readWithCompletion:^(DPHue *hue, NSError *err) {
         self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(createUsernameAt:) userInfo:host repeats:YES];
     }];

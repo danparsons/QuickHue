@@ -19,7 +19,8 @@
 @property (nonatomic, readwrite) BOOL writeSuccess;
 @property (nonatomic, strong, readwrite) NSMutableString *writeMessage;
 @property (nonatomic, strong, readwrite) NSString *name;
-
+@property (nonatomic, strong, readwrite) NSURL *getURL;
+@property (nonatomic, strong, readwrite) NSURL *putURL;
 
 @end
 
@@ -50,7 +51,32 @@
     return descr;
 }
 
-#pragma mark - Setters, many setters
+- (void)updateURLs {
+    NSString *base = [NSString stringWithFormat:@"http://%@/api/%@/lights/%@",
+                      self.host, self.username, self.number];
+    _getURL = [NSURL URLWithString:base];
+    _putURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/state", base]];
+}
+
+#pragma mark - Setters that update getURL and putURL
+
+- (void)setNumber:(NSNumber *)number {
+    _number = number;
+    [self updateURLs];
+}
+
+- (void)setUsername:(NSString *)username {
+    _username = username;
+    [self updateURLs];
+}
+
+- (void)setHost:(NSString *)host {
+    _host = host;
+    [self updateURLs];
+}
+
+
+#pragma mark - Setters that update pendingChanges
 
 - (void)setOn:(BOOL)on {
     self->_on = on;
@@ -215,6 +241,9 @@
         self->_saturation = [a decodeObjectForKey:@"saturation"];
         self->_getURL = [a decodeObjectForKey:@"getURL"];
         self->_putURL = [a decodeObjectForKey:@"putURL"];
+        self->_number = [a decodeObjectForKey:@"number"];
+        self->_host = [a decodeObjectForKey:@"host"];
+        self->_username = [a decodeObjectForKey:@"username"];
     }
     return self;
 }
@@ -234,6 +263,9 @@
     [a encodeObject:self->_saturation forKey:@"saturation"];
     [a encodeObject:self->_getURL forKey:@"getURL"];
     [a encodeObject:self->_putURL forKey:@"putURL"];
+    [a encodeObject:self->_number forKey:@"number"];
+    [a encodeObject:self->_host forKey:@"host"];
+    [a encodeObject:self->_username forKey:@"username"];
 }
 
 @end

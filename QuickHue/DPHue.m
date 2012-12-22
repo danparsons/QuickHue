@@ -25,14 +25,14 @@
 
 @implementation DPHue
 
-- (id)initWithHueControllerIP:(NSString *)host {
+- (id)initWithHueIP:(NSString *)host username:(NSString *)username {
     self = [super init];
     if (self) {
-        self.deviceType = @"test1";
         self.deviceType = @"QuickHue";
         self.authenticated = NO;
         //self.username = @"3c24efdac3d8a40baeda32579444743f";
         self.host = host;
+        self.username = username;
     }
     return self;
 }
@@ -98,10 +98,19 @@
         [light writeAll];
 }
 
-- (void)setUsername:(NSString *)username {
-    _username = username;
+- (void)updateURLs {
     _getURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/api/%@", self.host, self.username]];
     _putURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/api/%@/config", self.host, self.username]];
+}
+
+- (void)setUsername:(NSString *)username {
+    _username = username;
+    [self updateURLs];
+}
+
+- (void)setHost:(NSString *)host {
+    _host = host;
+    [self updateURLs];
 }
 
 #pragma mark - DPJSONSerializable
@@ -122,9 +131,15 @@
     for (NSDictionary *lightDict in d[@"lights"]) {
         DPHueLight *light = [[DPHueLight alloc] init];
         [light readFromJSONDictionary:d[@"lights"][lightDict]];
-        NSString *getURLString = [NSString stringWithFormat:@"http://%@/api/%@/lights/%@", self.host, self.username, lightDict];
+        /*NSString *getURLString = [NSString stringWithFormat:@"http://%@/api/%@/lights/%@", self.host, self.username, lightDict];
         light.getURL = [NSURL URLWithString:getURLString];
         light.putURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/state", getURLString]];
+        */
+        NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+        f.numberStyle = NSNumberFormatterDecimalStyle;
+        light.number = [f numberFromString:[lightDict allKeys][0]];
+        light.username = self.username;
+        light.host = self.host;
         [tmpLights addObject:light];
     }
     self->_lights = tmpLights;
@@ -135,8 +150,8 @@
 - (id)initWithCoder:(NSCoder *)a {
     self = [super init];
     if (self) {
-        self->_deviceType = @"test1";
-        self->_username = @"3c24efdac3d8a40baeda32579444743f";
+        self->_deviceType = @"QuickHue";
+        self->_username = [a decodeObjectForKey:@"username"];
         self->_host = [a decodeObjectForKey:@"host"];
         self->_getURL = [a decodeObjectForKey:@"getURL"];
         self->_putURL = [a decodeObjectForKey:@"putURL"];
@@ -150,6 +165,7 @@
     [a encodeObject:self->_putURL forKey:@"putURL"];
     [a encodeObject:self->_host forKey:@"host"];
     [a encodeObject:self->_lights forKey:@"lights"];
+    [a encodeObject:self->_username forKey:@"username"];
 }
 
 @end
