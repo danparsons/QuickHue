@@ -13,7 +13,7 @@
 - (NSString *)MD5String {
     const char *cstring = self.UTF8String;
     unsigned char result[16];
-    CC_MD5(cstring, strlen(cstring), result);
+    CC_MD5(cstring, (CC_LONG)strlen(cstring), result);
     return [NSString stringWithFormat:
             @"%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X",
             result[0], result[1], result[2], result[3],
