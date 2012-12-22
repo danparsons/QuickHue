@@ -16,7 +16,7 @@
 @property (nonatomic, strong, readwrite) NSString *deviceType;
 @property (nonatomic, strong, readwrite) NSURL *getURL;
 @property (nonatomic, strong, readwrite) NSURL *putURL;
-@property (nonatomic, strong, readwrite) NSString *ip;
+@property (nonatomic, strong, readwrite) NSString *host;
 @property (nonatomic, strong, readwrite) NSString *swversion;
 @property (nonatomic, strong, readwrite) NSArray *lights;
 @property (nonatomic, readwrite) BOOL authenticated;
@@ -25,7 +25,7 @@
 
 @implementation DPHue
 
-- (id)initWithHueControllerIP:(NSString *)ip {
+- (id)initWithHueControllerIP:(NSString *)host {
     self = [super init];
     if (self) {
         self.deviceType = @"test1";
@@ -34,6 +34,7 @@
         self.ip = ip;
         self.getURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/api/%@", ip, self.username]];
         self.putURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/api/%@/config", ip, self.username]];
+        self.host = host;
     }
     return self;
 }
@@ -99,7 +100,7 @@
     for (NSDictionary *lightDict in d[@"lights"]) {
         DPHueLight *light = [[DPHueLight alloc] init];
         [light readFromJSONDictionary:d[@"lights"][lightDict]];
-        NSString *getURLString = [NSString stringWithFormat:@"http://%@/api/%@/lights/%@", self.ip, self.username, lightDict];
+        NSString *getURLString = [NSString stringWithFormat:@"http://%@/api/%@/lights/%@", self.host, self.username, lightDict];
         light.getURL = [NSURL URLWithString:getURLString];
         light.putURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/state", getURLString]];
         [tmpLights addObject:light];
@@ -114,7 +115,7 @@
     if (self) {
         self->_deviceType = @"test1";
         self->_username = @"3c24efdac3d8a40baeda32579444743f";
-        self->_ip = [a decodeObjectForKey:@"ip"];
+        self->_host = [a decodeObjectForKey:@"host"];
         self->_getURL = [a decodeObjectForKey:@"getURL"];
         self->_putURL = [a decodeObjectForKey:@"putURL"];
         self->_lights = [a decodeObjectForKey:@"lights"];
@@ -125,7 +126,7 @@
 - (void)encodeWithCoder:(NSCoder *)a {
     [a encodeObject:self->_getURL forKey:@"getURL"];
     [a encodeObject:self->_putURL forKey:@"putURL"];
-    [a encodeObject:self->_ip forKey:@"ip"];
+    [a encodeObject:self->_host forKey:@"host"];
     [a encodeObject:self->_lights forKey:@"lights"];
 }
 
