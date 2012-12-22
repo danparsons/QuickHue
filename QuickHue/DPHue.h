@@ -25,6 +25,7 @@
 
 - (id)initWithHueControllerIP:(NSString *)ip;
 - (void)readWithCompletion:(void (^)(DPHue *hue, NSError *err))block;
+- (void)registerUsername;
 - (void)allLightsOff;
 - (void)allLightsOn;
 - (void)writeAll;

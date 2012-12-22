@@ -12,6 +12,7 @@
 
 @interface DPHueDiscover ()
 @property (nonatomic, strong) GCDAsyncUdpSocket *udpSocket;
+@property (nonatomic) BOOL foundHue;
 @end
 
 @implementation DPHueDiscover
@@ -64,8 +65,11 @@
         NSString *msg = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         // If this string is found, then url == hue!
         if ([msg rangeOfString:@"Philips hue bridge 2012"].location != NSNotFound) {
-            if ([self.delegate respondsToSelector:@selector(hueFound:)]) {
-                [self.delegate hueFound:url.host];
+            if ([self.delegate respondsToSelector:@selector(foundHueAt:)]) {
+                if (!self.foundHue) {
+                    [self.delegate foundHueAt:url.host];
+                    self.foundHue = YES;
+                }
             }
         } else {
             // Host is not a Hue

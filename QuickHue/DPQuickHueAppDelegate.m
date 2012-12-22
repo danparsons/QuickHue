@@ -11,14 +11,16 @@
 #import "DPQuickHuePreset.h"
 #import "DPHue.h"
 #import "DPHueDiscover.h"
+#import "DPQuickHuePrefsViewController.h"
 
 @interface DPQuickHueAppDelegate ()
 @property (nonatomic, strong) NSStatusItem *statusBar;
 @property (nonatomic, strong) NSMenu *statusBarMenu;
+@property (nonatomic, strong) DPQuickHuePrefsViewController *pvc;
 @property (nonatomic, strong) DPHueDiscover *dhd;
 @end
 
-NSString *const QuickHueAPIUsernamePrefKey = @"QuickHueAPIUsernamePrefKey";
+extern NSString *const QuickHueAPIUsernamePrefKey;
 
 @implementation DPQuickHueAppDelegate
 
@@ -36,7 +38,9 @@ NSString *const QuickHueAPIUsernamePrefKey = @"QuickHueAPIUsernamePrefKey";
         [prefs synchronize];
         WSLog(@"No API username found; generated %@", [prefs objectForKey:QuickHueAPIUsernamePrefKey]);
     }
+    self.pvc = [[DPQuickHuePrefsViewController alloc] init];
     WSLog(@"Username: %@", [DPHue generateUsername]);
+    [self preferences];
 }
 
 - (void)buildMenu {
@@ -94,6 +98,7 @@ NSString *const QuickHueAPIUsernamePrefKey = @"QuickHueAPIUsernamePrefKey";
 }
 
 - (void)preferences {
+    /*
     // temporarily using this for testing stuff
     DPHue *someHue = [[DPHue alloc] initWithHueControllerIP:@"192.168.0.25"];
     NSString *hueAPIUsername = [[NSUserDefaults standardUserDefaults] objectForKey:QuickHueAPIUsernamePrefKey];
@@ -103,12 +108,14 @@ NSString *const QuickHueAPIUsernamePrefKey = @"QuickHueAPIUsernamePrefKey";
     [someHue readWithCompletion:^(DPHue *hue, NSError *err) {
         NSLog(@"Authenticated: %d", hue.authenticated);
     }];
+     */
+    [self.pvc.view.window makeKeyAndOrderFront:self];
 }
 
 #pragma mark - DPHueDiscoverDelegate
 
-- (void)hueFound:(NSString *)hueHost {
-    WSLog(@"Hue found: %@", hueHost);
+- (void)foundHueAt:(NSString *)host {
+    WSLog(@"Hue found: %@", host);
 }
 
 @end

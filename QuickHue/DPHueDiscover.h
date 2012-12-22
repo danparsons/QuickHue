@@ -10,7 +10,7 @@
 #import <CocoaAsyncSocket/GCDAsyncUdpSocket.h>
 
 @protocol DPHueDiscoverDelegate <NSObject>
-- (void)hueFound:(NSString *)hueHost;
+- (void)foundHueAt:(NSString *)host;
 @end
 
 @interface DPHueDiscover : NSObject <GCDAsyncUdpSocketDelegate>

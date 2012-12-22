@@ -29,11 +29,9 @@
     self = [super init];
     if (self) {
         self.deviceType = @"test1";
+        self.deviceType = @"QuickHue";
         self.authenticated = NO;
-        self.username = @"3c24efdac3d8a40baeda32579444743f";
-        self.ip = ip;
-        self.getURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/api/%@", ip, self.username]];
-        self.putURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/api/%@/config", ip, self.username]];
+        //self.username = @"3c24efdac3d8a40baeda32579444743f";
         self.host = host;
     }
     return self;
@@ -41,10 +39,25 @@
 
 - (void)readWithCompletion:(void (^)(DPHue *, NSError *))block {
     NSURLRequest *req = [NSURLRequest requestWithURL:self.getURL];
+    NSLog(@"%@", self.getURL);
     DPJSONConnection *connection = [[DPJSONConnection alloc] initWithRequest:req];
     connection.completionBlock = block;
     connection.jsonRootObject = self;
     [connection start];
+}
+
+- (void)registerUsername {
+    NSDictionary *usernameDict = @{@"devicetype": self.deviceType, @"username": self.username};
+    NSURL *url = [NSURL URLWithString:urlString];
+    NSData *usernameJson = [NSJSONSerialization dataWithJSONObject:usernameDict options:0 error:nil];
+    req.HTTPMethod = @"POST";
+    DPJSONConnection *conn = [[DPJSONConnection alloc] initWithRequest:req];
+    NSString *pretty = [[NSString alloc] initWithData:usernameJson encoding:NSUTF8StringEncoding];
+    NSMutableString *msg = [[NSMutableString alloc] init];
+    [msg appendFormat:@"Writing to: %@\n", req.URL];
+    [msg appendFormat:@"Writing values: %@\n", pretty];
+    WSLog(@"%@", msg);
+    [conn start];
 }
 
 + (NSString *)generateUsername {
@@ -80,6 +93,12 @@
 - (void)writeAll {
     for (DPHueLight *light in self.lights)
         [light writeAll];
+}
+
+- (void)setUsername:(NSString *)username {
+    _username = username;
+    _getURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/api/%@", self.host, self.username]];
+    _putURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/api/%@/config", self.host, self.username]];
 }
 
 #pragma mark - DPJSONSerializable

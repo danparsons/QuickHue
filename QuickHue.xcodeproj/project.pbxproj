@@ -21,6 +21,8 @@
 		373B60531682F93C00E07569 /* DPQuickHuePresetStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 373B60521682F93C00E07569 /* DPQuickHuePresetStore.m */; };
 		373B60621685175A00E07569 /* DPHueDiscover.m in Sources */ = {isa = PBXBuildFile; fileRef = 373B60611685175A00E07569 /* DPHueDiscover.m */; };
 		373B607F16855FE100E07569 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 373B607E16855FE100E07569 /* NSString+MD5.m */; };
+		373B60B81685721C00E07569 /* DPQuickHuePrefsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 373B60B61685721C00E07569 /* DPQuickHuePrefsViewController.m */; };
+		373B60B91685721C00E07569 /* DPQuickHuePrefsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 373B60B71685721C00E07569 /* DPQuickHuePrefsViewController.xib */; };
 		B37641F120034CF093C8E105 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A22B7CA18F1463E9D41C163 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +58,9 @@
 		373B60611685175A00E07569 /* DPHueDiscover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPHueDiscover.m; sourceTree = "<group>"; };
 		373B607D16855FE100E07569 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
 		373B607E16855FE100E07569 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
+		373B60B51685721C00E07569 /* DPQuickHuePrefsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPQuickHuePrefsViewController.h; sourceTree = "<group>"; };
+		373B60B61685721C00E07569 /* DPQuickHuePrefsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPQuickHuePrefsViewController.m; sourceTree = "<group>"; };
+		373B60B71685721C00E07569 /* DPQuickHuePrefsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DPQuickHuePrefsViewController.xib; sourceTree = "<group>"; };
 		3B24891D14964C2EA2C1683E /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -115,14 +120,17 @@
 				373B60631685176800E07569 /* DPHue */,
 				373B60331682DF0500E07569 /* hue-logo.png */,
 				373B60311682DD7B00E07569 /* hue-logo@2x.png */,
-				373B60201682D7D700E07569 /* DPQuickHueAppDelegate.h */,
-				373B60211682D7D700E07569 /* DPQuickHueAppDelegate.m */,
 				373B60351682E1FB00E07569 /* MainMenu.xib */,
 				373B60511682F93C00E07569 /* DPQuickHuePresetStore.h */,
 				373B60521682F93C00E07569 /* DPQuickHuePresetStore.m */,
 				373B60421682E43900E07569 /* DPQuickHuePreset.h */,
 				373B60431682E43900E07569 /* DPQuickHuePreset.m */,
 				373B603E1682E41200E07569 /* WSLog.h */,
+				373B60201682D7D700E07569 /* DPQuickHueAppDelegate.h */,
+				373B60211682D7D700E07569 /* DPQuickHueAppDelegate.m */,
+				373B60B51685721C00E07569 /* DPQuickHuePrefsViewController.h */,
+				373B60B61685721C00E07569 /* DPQuickHuePrefsViewController.m */,
+				373B60B71685721C00E07569 /* DPQuickHuePrefsViewController.xib */,
 				373B60151682D7D700E07569 /* Supporting Files */,
 			);
 			path = QuickHue;
@@ -215,6 +223,7 @@
 				373B60321682DD7B00E07569 /* hue-logo@2x.png in Resources */,
 				373B60341682DF0500E07569 /* hue-logo.png in Resources */,
 				373B60361682E1FB00E07569 /* MainMenu.xib in Resources */,
+				373B60B91685721C00E07569 /* DPQuickHuePrefsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,6 +260,7 @@
 				373B60531682F93C00E07569 /* DPQuickHuePresetStore.m in Sources */,
 				373B60621685175A00E07569 /* DPHueDiscover.m in Sources */,
 				373B607F16855FE100E07569 /* NSString+MD5.m in Sources */,
+				373B60B81685721C00E07569 /* DPQuickHuePrefsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
