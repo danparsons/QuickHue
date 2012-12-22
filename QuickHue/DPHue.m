@@ -9,10 +9,10 @@
 #import "DPHue.h"
 #import "DPHueLight.h"
 #import "DPJSONConnection.h"
+#import "NSString+MD5.h"
 
 @interface DPHue ()
 @property (nonatomic, strong, readwrite) NSString *name;
-@property (nonatomic, strong, readwrite) NSString *username;
 @property (nonatomic, strong, readwrite) NSString *deviceType;
 @property (nonatomic, strong, readwrite) NSURL *getURL;
 @property (nonatomic, strong, readwrite) NSURL *putURL;
@@ -42,6 +42,10 @@
     connection.completionBlock = block;
     connection.jsonRootObject = self;
     [connection start];
+}
+
++ (NSString *)generateUsername {
+    return [[[NSHost currentHost] name] MD5String];
 }
 
 - (NSString *)description {

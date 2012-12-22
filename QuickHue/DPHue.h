@@ -12,13 +12,15 @@
 @interface DPHue : NSObject <DPJSONSerializable, NSCoding>
 
 @property (nonatomic, strong, readonly) NSString *name;
-@property (nonatomic, strong, readonly) NSString *username;
+@property (nonatomic, strong) NSString *username;
 @property (nonatomic, strong, readonly) NSString *deviceType;
 @property (nonatomic, strong, readonly) NSURL *getURL;
 @property (nonatomic, strong, readonly) NSURL *putURL;
 @property (nonatomic, strong, readonly) NSString *ip;
 @property (nonatomic, strong, readonly) NSString *swversion;
 @property (nonatomic, strong, readonly) NSArray *lights;
+
++ (NSString *)generateUsername; // hash of hostname
 
 - (id)initWithHueControllerIP:(NSString *)ip;
 - (void)readWithCompletion:(void (^)(DPHue *hue, NSError *err))block;
