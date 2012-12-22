@@ -117,9 +117,8 @@
 		373B60141682D7D700E07569 /* QuickHue */ = {
 			isa = PBXGroup;
 			children = (
+				373B60BA168576D000E07569 /* Images */,
 				373B60631685176800E07569 /* DPHue */,
-				373B60331682DF0500E07569 /* hue-logo.png */,
-				373B60311682DD7B00E07569 /* hue-logo@2x.png */,
 				373B60351682E1FB00E07569 /* MainMenu.xib */,
 				373B60511682F93C00E07569 /* DPQuickHuePresetStore.h */,
 				373B60521682F93C00E07569 /* DPQuickHuePresetStore.m */,
@@ -164,6 +163,15 @@
 				373B60611685175A00E07569 /* DPHueDiscover.m */,
 			);
 			name = DPHue;
+			sourceTree = "<group>";
+		};
+		373B60BA168576D000E07569 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				373B60331682DF0500E07569 /* hue-logo.png */,
+				373B60311682DD7B00E07569 /* hue-logo@2x.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
