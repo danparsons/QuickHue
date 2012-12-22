@@ -48,9 +48,12 @@
 
 - (void)registerUsername {
     NSDictionary *usernameDict = @{@"devicetype": self.deviceType, @"username": self.username};
+    NSString *urlString = [NSString stringWithFormat:@"http://%@/api/", self.host];
     NSURL *url = [NSURL URLWithString:urlString];
     NSData *usernameJson = [NSJSONSerialization dataWithJSONObject:usernameDict options:0 error:nil];
+    NSMutableURLRequest *req = [[NSMutableURLRequest alloc] initWithURL:url];
     req.HTTPMethod = @"POST";
+    req.HTTPBody = usernameJson;
     DPJSONConnection *conn = [[DPJSONConnection alloc] initWithRequest:req];
     NSString *pretty = [[NSString alloc] initWithData:usernameJson encoding:NSUTF8StringEncoding];
     NSMutableString *msg = [[NSMutableString alloc] init];
