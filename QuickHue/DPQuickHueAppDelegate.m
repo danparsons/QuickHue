@@ -109,20 +109,7 @@ extern NSString * const QuickHueHostPrefKey;
 }
 
 - (void)debug1 {
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    DPHue *someHue = [[DPHue alloc] initWithHueIP:[prefs objectForKey:QuickHueHostPrefKey] username:[prefs objectForKey:QuickHueAPIUsernamePrefKey]];
-    [someHue readWithCompletion:^(DPHue *hue, NSError *err) {
-        NSLog(@"Read complete:\n%@", hue);
-        NSLog(@"Changing host\n");
-        hue.host = @"123.245.222.212";
-        NSLog(@"%@\n", hue);
-        NSLog(@"Changing username\n");
-        hue.username = @"foofity";
-        DPHueLight *someLight = hue.lights[0];
-        someLight.on = NO;
-        NSLog(@"%@\n", hue);
-        
-    }];
+
 }
 
 #pragma mark - DPHueDiscoverDelegate

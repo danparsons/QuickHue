@@ -18,15 +18,15 @@
 @property (weak) IBOutlet NSWindow *window;
 @property (weak) IBOutlet NSPanel *discoverySheet;
 @property (weak) IBOutlet NSTextField *hueBridgeHostLabel;
-@property (weak) IBOutlet NSButton *startAtLoginCheckbox;
+@property (weak) IBOutlet NSButton *launchAtLoginCheckbox;
 @property (weak) IBOutlet NSTableView *presetsTableView;
 @property (weak) IBOutlet NSButton *removePresetButton;
 - (IBAction)addPreset:(id)sender;
 - (IBAction)removePreset:(id)sender;
 - (IBAction)tableViewSelected:(id)sender;
-
-
+- (IBAction)startAtLoginClicked:(id)sender;
 - (IBAction)startDiscovery:(id)sender;
+- (void)updateLaunchAtLoginCheckbox;
 
 
 // Properties of sheet

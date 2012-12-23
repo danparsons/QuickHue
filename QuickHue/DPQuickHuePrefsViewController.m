@@ -24,11 +24,17 @@ NSString *const QuickHueHostPrefKey = @"QuickHueHostPrefKey";
 
 @implementation DPQuickHuePrefsViewController
 
+void updateLaunchAtLoginCheckboxFunc(LSSharedFileListRef inList, void *context) {
+    DPQuickHuePrefsViewController *self = (__bridge id)context;
+    [self updateLaunchAtLoginCheckbox];
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-
+        LSSharedFileListRef loginItems = LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL);
+        LSSharedFileListAddObserver(loginItems, CFRunLoopGetMain(), (CFStringRef)NSDefaultRunLoopMode, updateLaunchAtLoginCheckboxFunc, (__bridge void *)(self));
     }
     
     return self;
@@ -47,6 +53,56 @@ NSString *const QuickHueHostPrefKey = @"QuickHueHostPrefKey";
         self.hueBridgeHostLabel.stringValue = @"None";
     else
         self.hueBridgeHostLabel.stringValue = someHost;
+    [self updateLaunchAtLoginCheckbox];
+}
+
+- (void)addLoginItem {
+    NSString *appPath = [[NSBundle mainBundle] bundlePath];
+    CFURLRef url = (__bridge CFURLRef)[NSURL fileURLWithPath:appPath];
+    LSSharedFileListRef loginItems = LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL);
+    if (loginItems) {
+        LSSharedFileListItemRef item = LSSharedFileListInsertItemURL(loginItems, kLSSharedFileListItemLast, NULL, NULL, url, NULL, NULL);
+        if (item)
+            CFRelease(item);
+    }
+    CFRelease(loginItems);
+}
+
+- (void)deleteLoginItem {
+    NSString *appPath = [[NSBundle mainBundle] bundlePath];
+    CFURLRef url = (__bridge CFURLRef)[NSURL fileURLWithPath:appPath];
+    LSSharedFileListRef loginItems = LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL);
+    if (loginItems) {
+        UInt32 seed;
+        NSArray *loginItemsArray = (__bridge NSArray *)LSSharedFileListCopySnapshot(loginItems, &seed);
+        for (id itemRef in loginItemsArray) {
+            if (LSSharedFileListItemResolve((__bridge LSSharedFileListItemRef)(itemRef), 0, (CFURLRef *) &url, NULL) == noErr) {
+                NSString *urlPath = [(__bridge NSURL *)url path];
+                if ([urlPath compare:appPath] == NSOrderedSame) {
+                    LSSharedFileListItemRemove(loginItems, (__bridge LSSharedFileListItemRef)(itemRef));
+                }
+            }
+        }
+    }
+}
+
+- (BOOL)willLaunchAtLogin {
+    NSString *appPath = [[NSBundle mainBundle] bundlePath];
+    CFURLRef url = (__bridge CFURLRef)[NSURL fileURLWithPath:appPath];
+    LSSharedFileListRef loginItems = LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL);
+    if (loginItems) {
+        UInt32 seed;
+        NSArray *loginItemsArray = (__bridge NSArray *)LSSharedFileListCopySnapshot(loginItems, &seed);
+        for (id itemRef in loginItemsArray) {
+            if (LSSharedFileListItemResolve((__bridge LSSharedFileListItemRef)(itemRef), 0, (CFURLRef *) &url, NULL) == noErr) {
+                NSString *urlPath = [(__bridge NSURL *)url path];
+                if ([urlPath compare:appPath] == NSOrderedSame) {
+                    return YES;
+                }
+            }
+        }
+    }
+    return NO;
 }
 
 - (void)discoveryTimeElapsed {
@@ -128,8 +184,22 @@ NSString *const QuickHueHostPrefKey = @"QuickHueHostPrefKey";
     }];    
 }
 
+- (void)updateLaunchAtLoginCheckbox {
+    if ([self willLaunchAtLogin])
+        self.launchAtLoginCheckbox.state = YES;
+    else
+        self.launchAtLoginCheckbox.state = NO;
+}
+
 - (IBAction)tableViewSelected:(id)sender {
     [self autosetRemovePresetButtonState];
+}
+
+- (IBAction)startAtLoginClicked:(id)sender {
+    if (self.launchAtLoginCheckbox.state)
+        [self addLoginItem];
+    else
+        [self deleteLoginItem];
 }
 
 - (void)autosetRemovePresetButtonState {
