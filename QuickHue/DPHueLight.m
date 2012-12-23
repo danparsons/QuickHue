@@ -82,21 +82,21 @@
 #pragma mark - Setters that update pendingChanges
 
 - (void)setOn:(BOOL)on {
-    self->_on = on;
+    _on = on;
     self.pendingChanges[@"on"] = [NSNumber numberWithBool:on];
     if (!self.holdUpdates)
         [self write];
 }
 
 - (void)setBrightness:(NSNumber *)brightness {
-    self->_brightness = brightness;
+    _brightness = brightness;
     self.pendingChanges[@"bri"] = brightness;
     if (!self.holdUpdates)
         [self write];
 }
 
 - (void)setHue:(NSNumber *)hue {
-    self->_hue = hue;
+    _hue = hue;
     self.pendingChanges[@"hue"] = hue;
     if (!self.holdUpdates)
         [self write];
@@ -104,21 +104,21 @@
 
 // This is the closest I've ever come to accidentally naming a method "sexy"
 - (void)setXy:(NSArray *)xy {
-    self->_xy = xy;
+    _xy = xy;
     self.pendingChanges[@"xy"] = xy;
     if (!self.holdUpdates)
         [self write];
 }
 
 - (void)setColorTemperature:(NSNumber *)colorTemperature {
-    self->_colorTemperature = colorTemperature;
+    _colorTemperature = colorTemperature;
     self.pendingChanges[@"ct"] = colorTemperature;
     if (!self.holdUpdates)
         [self write];
 }
 
 - (void)setSaturation:(NSNumber *)saturation {
-    self->_saturation = saturation;
+    _saturation = saturation;
     self.pendingChanges[@"sat"] = saturation;
     if (!self.holdUpdates)
         [self write];
@@ -187,39 +187,39 @@
         // the Hue is telling us the result of a PUT
         // Loop through all results, if any are not successful, error out
         BOOL errorFound = NO;
-        self->_writeMessage = [[NSMutableString alloc] init];
+        _writeMessage = [[NSMutableString alloc] init];
         for (NSDictionary *result in d) {
             if (result[@"error"]) {
                 errorFound = YES;
-                [self->_writeMessage appendFormat:@"%@\n", result[@"error"]];
+                [_writeMessage appendFormat:@"%@\n", result[@"error"]];
             }
             if (result[@"success"]) {
-                //[self->_writeMessage appendFormat:@"%@\n", result[@"success"]];
+                //[_writeMessage appendFormat:@"%@\n", result[@"success"]];
             }
         }
         if (errorFound) {
-            self->_writeSuccess = NO;
-            NSLog(@"Error writing values!\n%@", self->_writeMessage);
+            _writeSuccess = NO;
+            NSLog(@"Error writing values!\n%@", _writeMessage);
         }
         else {
-            self->_writeSuccess = YES;
-            [self->_pendingChanges removeAllObjects];
+            _writeSuccess = YES;
+            [_pendingChanges removeAllObjects];
         }
         return;
     }
-    self->_name = d[@"name"];
-    self->_modelid = d[@"modelid"];
-    self->_swversion = d[@"swversion"];
-    self->_type = d[@"type"];
-    self->_brightness = d[@"state"][@"bri"];
-    self->_colorMode = d[@"state"][@"colormode"];
-    self->_hue = d[@"state"][@"hue"];
-    self->_type = d[@"type"];
-    self->_on = (BOOL)d[@"state"][@"on"];
-    self->_reachable = (BOOL)d[@"state"][@"reachable"];
-    self->_xy = d[@"state"][@"xy"];
-    self->_colorTemperature = d[@"state"][@"ct"];
-    self->_saturation = d[@"state"][@"sat"];
+    _name = d[@"name"];
+    _modelid = d[@"modelid"];
+    _swversion = d[@"swversion"];
+    _type = d[@"type"];
+    _brightness = d[@"state"][@"bri"];
+    _colorMode = d[@"state"][@"colormode"];
+    _hue = d[@"state"][@"hue"];
+    _type = d[@"type"];
+    _on = (BOOL)d[@"state"][@"on"];
+    _reachable = (BOOL)d[@"state"][@"reachable"];
+    _xy = d[@"state"][@"xy"];
+    _colorTemperature = d[@"state"][@"ct"];
+    _saturation = d[@"state"][@"sat"];
 }
 
 #pragma mark - NSCoding 
@@ -230,45 +230,45 @@
         self.holdUpdates = YES;
         self.pendingChanges = [[NSMutableDictionary alloc] init];
         
-        self->_name = [a decodeObjectForKey:@"name"];
-        self->_modelid = [a decodeObjectForKey:@"modelid"];
-        self->_swversion = [a decodeObjectForKey:@"swversion"];
-        self->_type = [a decodeObjectForKey:@"type"];
-        self->_brightness = [a decodeObjectForKey:@"brightness"];
-        self->_colorMode = [a decodeObjectForKey:@"colorMode"];
-        self->_hue = [a decodeObjectForKey:@"hue"];
-        self->_type = [a decodeObjectForKey:@"bulbType"];
-        self->_on = [[a decodeObjectForKey:@"on"] boolValue];
-        self->_xy = [a decodeObjectForKey:@"xy"];
-        self->_colorTemperature = [a decodeObjectForKey:@"colorTemperature"];
-        self->_saturation = [a decodeObjectForKey:@"saturation"];
-        self->_getURL = [a decodeObjectForKey:@"getURL"];
-        self->_putURL = [a decodeObjectForKey:@"putURL"];
-        self->_number = [a decodeObjectForKey:@"number"];
-        self->_host = [a decodeObjectForKey:@"host"];
-        self->_username = [a decodeObjectForKey:@"username"];
+        _name = [a decodeObjectForKey:@"name"];
+        _modelid = [a decodeObjectForKey:@"modelid"];
+        _swversion = [a decodeObjectForKey:@"swversion"];
+        _type = [a decodeObjectForKey:@"type"];
+        _brightness = [a decodeObjectForKey:@"brightness"];
+        _colorMode = [a decodeObjectForKey:@"colorMode"];
+        _hue = [a decodeObjectForKey:@"hue"];
+        _type = [a decodeObjectForKey:@"bulbType"];
+        _on = [[a decodeObjectForKey:@"on"] boolValue];
+        _xy = [a decodeObjectForKey:@"xy"];
+        _colorTemperature = [a decodeObjectForKey:@"colorTemperature"];
+        _saturation = [a decodeObjectForKey:@"saturation"];
+        _getURL = [a decodeObjectForKey:@"getURL"];
+        _putURL = [a decodeObjectForKey:@"putURL"];
+        _number = [a decodeObjectForKey:@"number"];
+        _host = [a decodeObjectForKey:@"host"];
+        _username = [a decodeObjectForKey:@"username"];
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)a {
-    [a encodeObject:self->_name forKey:@"name"];
-    [a encodeObject:self->_modelid forKey:@"modelid"];
-    [a encodeObject:self->_swversion forKey:@"swversion"];
-    [a encodeObject:self->_type forKey:@"type"];
-    [a encodeObject:self->_brightness forKey:@"brightness"];
-    [a encodeObject:self->_colorMode forKey:@"colorMode"];
-    [a encodeObject:self->_hue forKey:@"hue"];
-    [a encodeObject:self->_type forKey:@"bulbType"];
+    [a encodeObject:_name forKey:@"name"];
+    [a encodeObject:_modelid forKey:@"modelid"];
+    [a encodeObject:_swversion forKey:@"swversion"];
+    [a encodeObject:_type forKey:@"type"];
+    [a encodeObject:_brightness forKey:@"brightness"];
+    [a encodeObject:_colorMode forKey:@"colorMode"];
+    [a encodeObject:_hue forKey:@"hue"];
+    [a encodeObject:_type forKey:@"bulbType"];
     [a encodeObject:[NSNumber numberWithBool:self->_on] forKey:@"on"];
-    [a encodeObject:self->_xy forKey:@"xy"];
-    [a encodeObject:self->_colorTemperature forKey:@"colorTemperature"];
-    [a encodeObject:self->_saturation forKey:@"saturation"];
-    [a encodeObject:self->_getURL forKey:@"getURL"];
-    [a encodeObject:self->_putURL forKey:@"putURL"];
-    [a encodeObject:self->_number forKey:@"number"];
-    [a encodeObject:self->_host forKey:@"host"];
-    [a encodeObject:self->_username forKey:@"username"];
+    [a encodeObject:_xy forKey:@"xy"];
+    [a encodeObject:_colorTemperature forKey:@"colorTemperature"];
+    [a encodeObject:_saturation forKey:@"saturation"];
+    [a encodeObject:_getURL forKey:@"getURL"];
+    [a encodeObject:_putURL forKey:@"putURL"];
+    [a encodeObject:_number forKey:@"number"];
+    [a encodeObject:_host forKey:@"host"];
+    [a encodeObject:_username forKey:@"username"];
 }
 
 @end

@@ -30,30 +30,30 @@
     self = [super init];
     if (self) {
         NSString *path = [self presetArchivePath];
-        self->_allPresets = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
-        if (!self->_allPresets)
-            self->_allPresets = [[NSMutableArray alloc] init];
+        _allPresets = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+        if (!_allPresets)
+            _allPresets = [[NSMutableArray alloc] init];
     }
     return self;
 }
 
 - (BOOL)save {
     NSString *path = [self presetArchivePath];
-    return [NSKeyedArchiver archiveRootObject:self->_allPresets toFile:path];
+    return [NSKeyedArchiver archiveRootObject:_allPresets toFile:path];
 }
 
 - (DPQuickHuePreset *)createPreset {
     DPQuickHuePreset *p = [[DPQuickHuePreset alloc] init];
-    [self->_allPresets addObject:p];
+    [_allPresets addObject:p];
     return p;
 }
 
 - (NSArray *)allPresets {
-    return self->_allPresets;
+    return _allPresets;
 }
 
 - (void)removePreset:(DPQuickHuePreset *)p {
-    [self->_allPresets removeObjectIdenticalTo:p];
+    [_allPresets removeObjectIdenticalTo:p];
 }
 
 - (NSString *)presetArchivePath {

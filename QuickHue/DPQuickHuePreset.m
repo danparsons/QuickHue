@@ -16,15 +16,15 @@
 - (id)initWithCoder:(NSCoder *)a {
     self = [super init];
     if (self) {
-        self->_name = [a decodeObjectForKey:@"name"];
-        self->_hue = [a decodeObjectForKey:@"hue"];
+        _name = [a decodeObjectForKey:@"name"];
+        _hue = [a decodeObjectForKey:@"hue"];
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)a {
-    [a encodeObject:self->_name forKey:@"name"];
-    [a encodeObject:self->_hue forKey:@"hue"];
+    [a encodeObject:_name forKey:@"name"];
+    [a encodeObject:_hue forKey:@"hue"];
 }
 
 @end

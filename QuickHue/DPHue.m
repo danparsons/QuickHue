@@ -123,13 +123,13 @@
         // We were given an array, not a dict, which means
         // Hue is giving us a result array, which (in this case)
         // means error: not authenticated
-        self->_authenticated = NO;
+        _authenticated = NO;
         return;
     }
-    self->_name = d[@"config"][@"name"];
-    if (self->_name)
-        self->_authenticated = YES;
-    self->_swversion = d[@"config"][@"swversion"];
+    _name = d[@"config"][@"name"];
+    if (_name)
+        _authenticated = YES;
+    _swversion = d[@"config"][@"swversion"];
     NSMutableArray *tmpLights = [[NSMutableArray alloc] init];
     for (id lightItem in d[@"lights"]) {
         DPHueLight *light = [[DPHueLight alloc] init];
@@ -145,7 +145,7 @@
         light.host = self.host;
         [tmpLights addObject:light];
     }
-    self->_lights = tmpLights;
+    _lights = tmpLights;
 }
 
 #pragma mark - NSCoding
@@ -153,22 +153,22 @@
 - (id)initWithCoder:(NSCoder *)a {
     self = [super init];
     if (self) {
-        self->_deviceType = @"QuickHue";
-        self->_username = [a decodeObjectForKey:@"username"];
-        self->_host = [a decodeObjectForKey:@"host"];
-        self->_getURL = [a decodeObjectForKey:@"getURL"];
-        self->_putURL = [a decodeObjectForKey:@"putURL"];
-        self->_lights = [a decodeObjectForKey:@"lights"];
+        _deviceType = @"QuickHue";
+        _username = [a decodeObjectForKey:@"username"];
+        _host = [a decodeObjectForKey:@"host"];
+        _getURL = [a decodeObjectForKey:@"getURL"];
+        _putURL = [a decodeObjectForKey:@"putURL"];
+        _lights = [a decodeObjectForKey:@"lights"];
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)a {
-    [a encodeObject:self->_getURL forKey:@"getURL"];
-    [a encodeObject:self->_putURL forKey:@"putURL"];
-    [a encodeObject:self->_host forKey:@"host"];
-    [a encodeObject:self->_lights forKey:@"lights"];
-    [a encodeObject:self->_username forKey:@"username"];
+    [a encodeObject:_getURL forKey:@"getURL"];
+    [a encodeObject:_putURL forKey:@"putURL"];
+    [a encodeObject:_host forKey:@"host"];
+    [a encodeObject:_lights forKey:@"lights"];
+    [a encodeObject:_username forKey:@"username"];
 }
 
 @end
