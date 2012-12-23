@@ -61,12 +61,16 @@ void updateLaunchAtLoginCheckboxFunc(LSSharedFileListRef inList, void *context) 
     NSMutableAttributedString *twitterStr = [[NSMutableAttributedString alloc] init];
     [twitterStr appendAttributedString:[NSAttributedString hyperlinkFromString:@"@danparsons" withURL:twitterURL]];
     self.twitterLabel.attributedStringValue = twitterStr;
+    [self.twitterLabel sizeToFit];
+    
     self.githubLabel.allowsEditingTextAttributes = YES;
     [self.githubLabel setSelectable:YES];
     NSURL *githubURL = [NSURL URLWithString:@"https://github.com/danparsons/QuickHue"];
     NSMutableAttributedString *githubStr = [[NSMutableAttributedString alloc] init];
     [githubStr appendAttributedString:[NSAttributedString hyperlinkFromString:@"GitHub" withURL:githubURL]];
     self.githubLabel.attributedStringValue = githubStr;
+    [self.githubLabel sizeToFit];
+    
     self.versionLabel.stringValue = [NSString stringWithFormat:@"QuickHue v%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]];
 }
 
@@ -79,7 +83,8 @@ void updateLaunchAtLoginCheckboxFunc(LSSharedFileListRef inList, void *context) 
         if (item)
             CFRelease(item);
     }
-    CFRelease(loginItems);
+    if (loginItems)
+        CFRelease(loginItems);
 }
 
 - (void)deleteLoginItem {
