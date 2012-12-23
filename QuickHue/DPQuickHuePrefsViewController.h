@@ -9,14 +9,23 @@
 #import <Cocoa/Cocoa.h>
 #import "DPHueDiscover.h"
 
-@interface DPQuickHuePrefsViewController : NSViewController <DPHueDiscoverDelegate>
+@interface DPQuickHuePrefsViewController : NSViewController <DPHueDiscoverDelegate, NSTableViewDataSource, NSTableViewDelegate>
 
 // Properties of main prefs window
+@property (nonatomic, strong) id delegate;
 @property (weak) IBOutlet NSWindow *window;
 @property (weak) IBOutlet NSPanel *discoverySheet;
 @property (weak) IBOutlet NSTextField *hueBridgeHostLabel;
 @property (weak) IBOutlet NSButton *startAtLoginCheckbox;
+@property (weak) IBOutlet NSTableView *presetsTableView;
+@property (weak) IBOutlet NSButton *removePresetButton;
+- (IBAction)addPreset:(id)sender;
+- (IBAction)removePreset:(id)sender;
+- (IBAction)tableViewSelected:(id)sender;
+
+
 - (IBAction)startDiscovery:(id)sender;
+
 
 // Properties of sheet
 @property (weak) IBOutlet NSProgressIndicator *discoveryProgressIndicator;

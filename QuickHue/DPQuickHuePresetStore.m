@@ -73,6 +73,15 @@
     [_allPresets removeObjectIdenticalTo:p];
 }
 
+- (void)removePresetAtIndex:(int)i {
+    [_allPresets removeObjectAtIndex:i];
+}
+
+- (void)setName:(NSString *)name atIndex:(int)i {
+    DPQuickHuePreset *preset = _allPresets[i];
+    preset.name = name;
+}
+
 - (NSString *)presetArchivePath {
     NSFileManager *fileMan = [NSFileManager defaultManager];
     NSArray *dirs = [fileMan URLsForDirectory:NSApplicationSupportDirectory inDomains:NSUserDomainMask];

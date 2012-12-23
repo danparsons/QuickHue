@@ -41,8 +41,9 @@ extern NSString * const QuickHueHostPrefKey;
         WSLog(@"No API username found; generated %@", [prefs objectForKey:QuickHueAPIUsernamePrefKey]);
     }
     self.pvc = [[DPQuickHuePrefsViewController alloc] init];
+    self.pvc.delegate = self;
     WSLog(@"Username: %@", [DPHue generateUsername]);
-    //[self preferences];
+    [self preferences];
 }
 
 - (void)buildMenu {

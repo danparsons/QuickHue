@@ -12,10 +12,13 @@
 @interface DPQuickHuePresetStore : NSObject
 
 + (DPQuickHuePresetStore *)sharedStore;
+
 - (void)removePreset:(DPQuickHuePreset *)p;
+- (void)removePresetAtIndex:(int)i;
 - (NSArray *)allPresets;
 - (DPQuickHuePreset *)createPreset;
 - (NSString *)presetArchivePath;
 - (BOOL)save;
+- (void)setName:(NSString *)name atIndex:(int)i;
 
 @end

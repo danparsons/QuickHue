@@ -13,4 +13,6 @@
 
 @property (assign) IBOutlet NSWindow *window;
 
+- (void)buildMenu;
+
 @end
