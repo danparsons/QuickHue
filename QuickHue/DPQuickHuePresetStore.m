@@ -42,8 +42,25 @@
     return [NSKeyedArchiver archiveRootObject:_allPresets toFile:path];
 }
 
+- (BOOL)nameUsed:(NSString *)name {
+    for (DPQuickHuePreset *preset in self.allPresets) {
+        if ([preset.name isEqualToString:name])
+            return YES;
+    }
+    return NO;
+}
+
+- (NSString *)generateName {
+    for (int i = 1; ; i++) {
+        NSString *name = [NSString stringWithFormat:@"Preset %d", i];
+        if (![self nameUsed:name])
+            return name;
+    }
+}
+
 - (DPQuickHuePreset *)createPreset {
     DPQuickHuePreset *p = [[DPQuickHuePreset alloc] init];
+    p.name = [self generateName];
     [_allPresets addObject:p];
     return p;
 }

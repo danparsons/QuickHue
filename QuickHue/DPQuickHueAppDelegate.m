@@ -78,7 +78,6 @@ extern NSString * const QuickHueHostPrefKey;
 - (void)makePreset {
     DPQuickHuePresetStore *presetStore = [DPQuickHuePresetStore sharedStore];
     DPQuickHuePreset *preset = [presetStore createPreset];
-    preset.name = @"Some Preset";
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     preset.hue = [[DPHue alloc] initWithHueIP:[prefs objectForKey:QuickHueHostPrefKey] username:[prefs objectForKey:QuickHueAPIUsernamePrefKey]];
     [preset.hue readWithCompletion:^(DPHue *hue, NSError *err) {
