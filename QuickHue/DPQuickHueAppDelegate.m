@@ -45,18 +45,19 @@ extern NSString * const QuickHueHostPrefKey;
         [prefs synchronize];
         [self.pvc.view.window makeKeyAndOrderFront:self];
     }
-        //WSLog(@"No API username found; generated %@", [prefs objectForKey:QuickHueAPIUsernamePrefKey]);
-    //WSLog(@"Username: %@", [DPHue generateUsername]);
 }
 
 - (void)buildMenu {
     self.statusBarMenu = [[NSMenu alloc] initWithTitle:@"QuickHue"];
     DPQuickHuePresetStore *presetStore = [DPQuickHuePresetStore sharedStore];
-    for (DPQuickHuePreset *preset in presetStore.allPresets) {
-        NSMenuItem *someItem = [[NSMenuItem alloc] initWithTitle:preset.name action:@selector(applyPreset:) keyEquivalent:@""];
-        someItem.representedObject = preset;
-        [self.statusBarMenu addItem:someItem];
-    }
+    if ([presetStore allPresets].count > 0) {
+        for (DPQuickHuePreset *preset in presetStore.allPresets) {
+            NSMenuItem *someItem = [[NSMenuItem alloc] initWithTitle:preset.name action:@selector(applyPreset:) keyEquivalent:@""];
+            someItem.representedObject = preset;
+            [self.statusBarMenu addItem:someItem];
+        }
+    } else
+        [self.statusBarMenu addItem:[[NSMenuItem alloc] initWithTitle:@"No presets, create one!" action:nil keyEquivalent:@""]];
     
     [self.statusBarMenu addItem:[NSMenuItem separatorItem]];
     
