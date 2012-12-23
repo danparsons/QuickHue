@@ -58,30 +58,16 @@ extern NSString * const QuickHueHostPrefKey;
         }
     } else
         [self.statusBarMenu addItem:[[NSMenuItem alloc] initWithTitle:@"No presets, create one!" action:nil keyEquivalent:@""]];
-    
     [self.statusBarMenu addItem:[NSMenuItem separatorItem]];
-    
-    NSMenuItem *allOnItem = [[NSMenuItem alloc] initWithTitle:@"All Lights On" action:@selector(allOn) keyEquivalent:@""];
-    [self.statusBarMenu addItem:allOnItem];
-    
-    NSMenuItem *allOffItem = [[NSMenuItem alloc] initWithTitle:@"All Lights Off" action:@selector(allOff) keyEquivalent:@""];
-    [self.statusBarMenu addItem:allOffItem];
-    
+    [self.statusBarMenu addItem:[[NSMenuItem alloc] initWithTitle:@"All Lights On" action:@selector(allOn) keyEquivalent:@""]];
+    [self.statusBarMenu addItem:[[NSMenuItem alloc] initWithTitle:@"All Lights Off" action:@selector(allOff) keyEquivalent:@""]];
     [self.statusBarMenu addItem:[NSMenuItem separatorItem]];
-    
 #ifdef DEBUG
-    NSMenuItem *debug1 = [[NSMenuItem alloc] initWithTitle:@"Debug1" action:@selector(debug1) keyEquivalent:@""];
-    [self.statusBarMenu addItem:debug1];
+    [self.statusBarMenu addItem:[[NSMenuItem alloc] initWithTitle:@"Debug1" action:@selector(debug1) keyEquivalent:@""]];
 #endif
-    
-    NSMenuItem *makePresetItem = [[NSMenuItem alloc] initWithTitle:@"Make Preset" action:@selector(makePreset) keyEquivalent:@""];
-    [self.statusBarMenu addItem:makePresetItem];
-    
-    NSMenuItem *preferencesMenuItem = [[NSMenuItem alloc] initWithTitle:@"Preferences..." action:@selector(preferences) keyEquivalent:@""];
-    [self.statusBarMenu addItem:preferencesMenuItem];
-    
-    NSMenuItem *quitMenuItem = [[NSMenuItem alloc] initWithTitle:@"Quit" action:@selector(terminate:) keyEquivalent:@""];
-    [self.statusBarMenu addItem:quitMenuItem];
+    [self.statusBarMenu addItem:[[NSMenuItem alloc] initWithTitle:@"Create Preset" action:@selector(createPreset) keyEquivalent:@""]];
+    [self.statusBarMenu addItem:[[NSMenuItem alloc] initWithTitle:@"Preferences..." action:@selector(preferences) keyEquivalent:@""]];
+    [self.statusBarMenu addItem:[[NSMenuItem alloc] initWithTitle:@"Quit" action:@selector(terminate:) keyEquivalent:@""]];
     self.statusBar.menu = self.statusBarMenu;
 }
 
@@ -90,7 +76,7 @@ extern NSString * const QuickHueHostPrefKey;
     [preset.hue writeAll];
 }
 
-- (void)makePreset {
+- (void)createPreset {
     DPQuickHuePresetStore *presetStore = [DPQuickHuePresetStore sharedStore];
     DPQuickHuePreset *preset = [presetStore createPreset];
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
