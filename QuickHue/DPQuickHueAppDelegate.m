@@ -10,6 +10,7 @@
 #import "DPQuickHuePresetStore.h"
 #import "DPQuickHuePreset.h"
 #import "DPHue.h"
+#import "DPHueLight.h"
 #import "DPHueDiscover.h"
 #import "DPQuickHuePrefsViewController.h"
 
@@ -111,6 +112,8 @@ extern NSString * const QuickHueHostPrefKey;
         NSLog(@"%@\n", hue);
         NSLog(@"Changing username\n");
         hue.username = @"foofity";
+        DPHueLight *someLight = hue.lights[0];
+        someLight.on = NO;
         NSLog(@"%@\n", hue);
         
     }];

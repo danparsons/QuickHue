@@ -51,6 +51,7 @@
     [descr appendFormat:@"\tSaturation: %@\n", self.saturation];
     [descr appendFormat:@"\tColor Temperature: %@\n", self.colorTemperature];
     [descr appendFormat:@"\txy: %@\n", self.xy];
+    [descr appendFormat:@"\tPending changes: %@\n", self.pendingChanges];
     return descr;
 }
 
