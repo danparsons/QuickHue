@@ -38,7 +38,7 @@
 
 - (void)readWithCompletion:(void (^)(DPHue *, NSError *))block {
     NSURLRequest *req = [NSURLRequest requestWithURL:self.getURL];
-    WSLog(@"Reading %@", self.getURL);
+    //WSLog(@"Reading %@", self.getURL);
     DPJSONConnection *connection = [[DPJSONConnection alloc] initWithRequest:req];
     connection.completionBlock = block;
     connection.jsonRootObject = self;

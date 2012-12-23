@@ -32,18 +32,21 @@ extern NSString * const QuickHueHostPrefKey;
     self.statusBar.highlightMode = YES;
     [self buildMenu];
     
+    self.pvc = [[DPQuickHuePrefsViewController alloc] init];
+    self.pvc.delegate = self;
+
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    if (![prefs objectForKey:QuickHueAPIUsernamePrefKey]) {
-        // No API username found in user prefs, generate one
+    if ( (![prefs objectForKey:QuickHueAPIUsernamePrefKey]) ||
+        (![prefs objectForKey:QuickHueHostPrefKey])) {
+        self.pvc.firstRun = YES;
+        // No API username or hostname found, probably first app run
         NSString *newUsername = [DPHue generateUsername];
         [prefs setObject:newUsername forKey:QuickHueAPIUsernamePrefKey];
         [prefs synchronize];
-        WSLog(@"No API username found; generated %@", [prefs objectForKey:QuickHueAPIUsernamePrefKey]);
+        [self.pvc.view.window makeKeyAndOrderFront:self];
     }
-    self.pvc = [[DPQuickHuePrefsViewController alloc] init];
-    self.pvc.delegate = self;
-    WSLog(@"Username: %@", [DPHue generateUsername]);
-    [self preferences];
+        //WSLog(@"No API username found; generated %@", [prefs objectForKey:QuickHueAPIUsernamePrefKey]);
+    //WSLog(@"Username: %@", [DPHue generateUsername]);
 }
 
 - (void)buildMenu {
@@ -57,8 +60,10 @@ extern NSString * const QuickHueHostPrefKey;
     NSMenuItem *separatorItem = [NSMenuItem separatorItem];
     [self.statusBarMenu addItem:separatorItem];
     
+#ifdef DEBUG
     NSMenuItem *debug1 = [[NSMenuItem alloc] initWithTitle:@"Debug1" action:@selector(debug1) keyEquivalent:@""];
     [self.statusBarMenu addItem:debug1];
+#endif
     
     NSMenuItem *makePresetItem = [[NSMenuItem alloc] initWithTitle:@"Make Preset" action:@selector(makePreset) keyEquivalent:@""];
     [self.statusBarMenu addItem:makePresetItem];
@@ -81,6 +86,7 @@ extern NSString * const QuickHueHostPrefKey;
     DPQuickHuePreset *preset = [presetStore createPreset];
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     preset.hue = [[DPHue alloc] initWithHueIP:[prefs objectForKey:QuickHueHostPrefKey] username:[prefs objectForKey:QuickHueAPIUsernamePrefKey]];
+    [self.pvc.presetsTableView reloadData];
     [preset.hue readWithCompletion:^(DPHue *hue, NSError *err) {
         [presetStore save];
         [self buildMenu];

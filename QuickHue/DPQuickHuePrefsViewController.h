@@ -11,6 +11,8 @@
 
 @interface DPQuickHuePrefsViewController : NSViewController <DPHueDiscoverDelegate, NSTableViewDataSource, NSTableViewDelegate>
 
+@property (nonatomic) BOOL firstRun;
+
 // Properties of main prefs window
 @property (nonatomic, strong) id delegate;
 @property (weak) IBOutlet NSWindow *window;
@@ -31,6 +33,8 @@
 @property (weak) IBOutlet NSProgressIndicator *discoveryProgressIndicator;
 @property (weak) IBOutlet NSTextField *discoveryStatusLabel;
 @property (weak) IBOutlet NSButton *discoverySaveButton;
+@property (weak) IBOutlet NSImageView *successCheckmarkImage;
+
 - (IBAction)cancelDiscovery:(id)sender;
 - (IBAction)saveDiscovery:(id)sender;
 

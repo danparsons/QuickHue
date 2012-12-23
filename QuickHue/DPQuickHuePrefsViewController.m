@@ -36,8 +36,27 @@ NSString *const QuickHueHostPrefKey = @"QuickHueHostPrefKey";
 
 - (void)loadView {
     [super loadView];
-    self.hueBridgeHostLabel.stringValue = [[NSUserDefaults standardUserDefaults] objectForKey:QuickHueHostPrefKey];
+    if (self.firstRun) {
+        self.firstRun = NO;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2 * NSEC_PER_SEC), dispatch_get_current_queue(), ^{
+            [self startDiscovery:self];
+        });
+    }
+    NSString *someHost = [[NSUserDefaults standardUserDefaults] objectForKey:QuickHueHostPrefKey];
+    if (!someHost)
+        self.hueBridgeHostLabel.stringValue = @"None";
+    else
+        self.hueBridgeHostLabel.stringValue = someHost;
 }
+
+- (void)discoveryTimeElapsed {
+    self.dhd = nil;
+    [self.timer invalidate];
+    [self.discoveryProgressIndicator stopAnimation:self];
+    self.discoveryStatusLabel.stringValue = @"Failed to find Hue";
+}
+
+#pragma mark - IBActions
 
 - (IBAction)addPreset:(id)sender {
     DPQuickHuePresetStore *presetStore = [DPQuickHuePresetStore sharedStore];
@@ -47,8 +66,7 @@ NSString *const QuickHueHostPrefKey = @"QuickHueHostPrefKey";
     [self.presetsTableView reloadData];
     preset.hue = [[DPHue alloc] initWithHueIP:[prefs objectForKey:QuickHueHostPrefKey] username:[prefs objectForKey:QuickHueAPIUsernamePrefKey]];
     [preset.hue readWithCompletion:^(DPHue *hue, NSError *err) {
-        [presetStore save];
-        
+        [presetStore save];        
     }];
 }
 
@@ -63,9 +81,12 @@ NSString *const QuickHueHostPrefKey = @"QuickHueHostPrefKey";
 
 - (IBAction)startDiscovery:(id)sender {
     self.dhd = [[DPHueDiscover alloc] initWithDelegate:self];
-    [self.dhd discover];
+    [self.dhd discoverForDuration:30 withCompletion:^{
+        [self discoveryTimeElapsed];
+    }];
     [self.discoveryProgressIndicator startAnimation:self];
-    self.discoveryStatusLabel.stringValue = @"Discovering...";
+    self.discoveryStatusLabel.stringValue = @"Searching for Hue...";
+    [self.successCheckmarkImage setHidden:YES];
     [NSApp beginSheet:self.discoverySheet modalForWindow:self.window modalDelegate:self didEndSelector:nil contextInfo:nil];
 }
 
@@ -99,6 +120,7 @@ NSString *const QuickHueHostPrefKey = @"QuickHueHostPrefKey";
             [self.discoverySaveButton setEnabled:YES];
             self.foundHueHost = hue.host;
             self.discoveryStatusLabel.stringValue = [NSString stringWithFormat:@"Found Hue at %@, named '%@'!", hue.host, hue.name];
+            [self.successCheckmarkImage setHidden:NO];
         } else {
             [someHue registerUsername];
             self.discoveryStatusLabel.stringValue = @"Press Button On Hue!";

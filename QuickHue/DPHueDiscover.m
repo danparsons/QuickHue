@@ -25,15 +25,16 @@
     return self;
 }
 
-- (void)discover {
+- (void)discoverForDuration:(int)seconds withCompletion:(void (^)())block {
     WSLog(@"Starting discovery");
     self.udpSocket = [self createSocket];
     NSString *msg = @"M-SEARCH * HTTP/1.1\r\nHost: 239.255.255.250:1900\r\nMan: ssdp:discover\r\nMx: 3\r\nST: \"ssdp:all\"\r\n\r\n";
     NSData *msgData = [msg dataUsingEncoding:NSUTF8StringEncoding];
     [self.udpSocket sendData:msgData toHost:@"239.255.255.250" port:1900 withTimeout:-1 tag:0];
     
-    // 5 seconds later, stop discovering
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 5 * NSEC_PER_SEC), dispatch_get_current_queue(), ^{
+    // seconds seconds later, stop discovering
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, seconds * NSEC_PER_SEC), dispatch_get_current_queue(), ^{
+        block();
         [self stopDiscovery];
     });
 }

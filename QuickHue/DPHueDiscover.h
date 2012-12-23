@@ -18,7 +18,7 @@
 @property (nonatomic, weak) id<DPHueDiscoverDelegate> delegate;
 
 - (id)initWithDelegate:(id<DPHueDiscoverDelegate>)delegate;
-- (void)discover;
+- (void)discoverForDuration:(int)seconds withCompletion:(void (^)())block;
 - (void)stopDiscovery;
 
 @end
