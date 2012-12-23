@@ -175,7 +175,9 @@
     [msg appendFormat:@"Writing to: %@\n", self.putURL];
     [msg appendFormat:@"Writing values: %@\n", pretty];
     connection.completionBlock = ^(id obj, NSError *err) {
+#ifdef DEBUG
         WSLog(@"writeSuccess: %@:\n%@", self.writeSuccess ? @"True" : @"False", msg);
+#endif
     };
     [connection start];
 }

@@ -57,8 +57,16 @@ extern NSString * const QuickHueHostPrefKey;
         someItem.representedObject = preset;
         [self.statusBarMenu addItem:someItem];
     }
-    NSMenuItem *separatorItem = [NSMenuItem separatorItem];
-    [self.statusBarMenu addItem:separatorItem];
+    
+    [self.statusBarMenu addItem:[NSMenuItem separatorItem]];
+    
+    NSMenuItem *allOnItem = [[NSMenuItem alloc] initWithTitle:@"All Lights On" action:@selector(allOn) keyEquivalent:@""];
+    [self.statusBarMenu addItem:allOnItem];
+    
+    NSMenuItem *allOffItem = [[NSMenuItem alloc] initWithTitle:@"All Lights Off" action:@selector(allOff) keyEquivalent:@""];
+    [self.statusBarMenu addItem:allOffItem];
+    
+    [self.statusBarMenu addItem:[NSMenuItem separatorItem]];
     
 #ifdef DEBUG
     NSMenuItem *debug1 = [[NSMenuItem alloc] initWithTitle:@"Debug1" action:@selector(debug1) keyEquivalent:@""];
@@ -90,6 +98,22 @@ extern NSString * const QuickHueHostPrefKey;
     [preset.hue readWithCompletion:^(DPHue *hue, NSError *err) {
         [presetStore save];
         [self buildMenu];
+    }];
+}
+
+- (void)allOn {
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    DPHue *someHue = [[DPHue alloc] initWithHueIP:[prefs objectForKey:QuickHueHostPrefKey] username:[prefs objectForKey:QuickHueAPIUsernamePrefKey]];
+    [someHue readWithCompletion:^(DPHue *hue, NSError *err) {
+        [hue allLightsOn];
+    }];
+}
+
+- (void)allOff {
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    DPHue *someHue = [[DPHue alloc] initWithHueIP:[prefs objectForKey:QuickHueHostPrefKey] username:[prefs objectForKey:QuickHueAPIUsernamePrefKey]];
+    [someHue readWithCompletion:^(DPHue *hue, NSError *err) {
+        [hue allLightsOff];
     }];
 }
 
