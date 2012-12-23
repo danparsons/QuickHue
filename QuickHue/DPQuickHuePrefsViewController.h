@@ -21,12 +21,17 @@
 @property (weak) IBOutlet NSButton *launchAtLoginCheckbox;
 @property (weak) IBOutlet NSTableView *presetsTableView;
 @property (weak) IBOutlet NSButton *removePresetButton;
+@property (weak) IBOutlet NSTextField *twitterLabel;
+@property (weak) IBOutlet NSTextField *githubLabel;
+@property (weak) IBOutlet NSTextField *versionLabel;
 - (IBAction)addPreset:(id)sender;
 - (IBAction)removePreset:(id)sender;
 - (IBAction)tableViewSelected:(id)sender;
 - (IBAction)startAtLoginClicked:(id)sender;
 - (IBAction)startDiscovery:(id)sender;
 - (void)updateLaunchAtLoginCheckbox;
+
+
 
 
 // Properties of sheet

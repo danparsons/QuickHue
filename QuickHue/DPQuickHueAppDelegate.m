@@ -105,6 +105,8 @@ extern NSString * const QuickHueHostPrefKey;
         NSLog(@"Authenticated: %d", hue.authenticated);
     }];
      */
+    [NSApp activateIgnoringOtherApps:YES];
+    self.pvc.view.window.collectionBehavior = NSWindowCollectionBehaviorCanJoinAllSpaces;
     [self.pvc.view.window makeKeyAndOrderFront:self];
 }
 

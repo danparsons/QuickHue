@@ -26,6 +26,7 @@
 		37F4DFF81686935300D508D5 /* appicon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 37F4DFF71686935300D508D5 /* appicon.icns */; };
 		37F4DFFB1686E65900D508D5 /* checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 37F4DFF91686E65900D508D5 /* checkmark.png */; };
 		37F4DFFC1686E65900D508D5 /* checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37F4DFFA1686E65900D508D5 /* checkmark@2x.png */; };
+		37F4E0031686FD8600D508D5 /* NSAttributedString+Hyperlink.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F4E0021686FD8600D508D5 /* NSAttributedString+Hyperlink.m */; };
 		B37641F120034CF093C8E105 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A22B7CA18F1463E9D41C163 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +69,8 @@
 		37F4DFF71686935300D508D5 /* appicon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = appicon.icns; path = ../appicon.icns; sourceTree = "<group>"; };
 		37F4DFF91686E65900D508D5 /* checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = checkmark.png; path = Images/checkmark.png; sourceTree = "<group>"; };
 		37F4DFFA1686E65900D508D5 /* checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "checkmark@2x.png"; path = "Images/checkmark@2x.png"; sourceTree = "<group>"; };
+		37F4E0011686FD8600D508D5 /* NSAttributedString+Hyperlink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+Hyperlink.h"; sourceTree = "<group>"; };
+		37F4E0021686FD8600D508D5 /* NSAttributedString+Hyperlink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+Hyperlink.m"; sourceTree = "<group>"; };
 		3B24891D14964C2EA2C1683E /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -132,6 +135,8 @@
 				373B60421682E43900E07569 /* DPQuickHuePreset.h */,
 				373B60431682E43900E07569 /* DPQuickHuePreset.m */,
 				373B603E1682E41200E07569 /* WSLog.h */,
+				37F4E0011686FD8600D508D5 /* NSAttributedString+Hyperlink.h */,
+				37F4E0021686FD8600D508D5 /* NSAttributedString+Hyperlink.m */,
 				373B60201682D7D700E07569 /* DPQuickHueAppDelegate.h */,
 				373B60211682D7D700E07569 /* DPQuickHueAppDelegate.m */,
 				373B60B51685721C00E07569 /* DPQuickHuePrefsViewController.h */,
@@ -283,6 +288,7 @@
 				373B60621685175A00E07569 /* DPHueDiscover.m in Sources */,
 				373B607F16855FE100E07569 /* NSString+MD5.m in Sources */,
 				373B60B81685721C00E07569 /* DPQuickHuePrefsViewController.m in Sources */,
+				37F4E0031686FD8600D508D5 /* NSAttributedString+Hyperlink.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

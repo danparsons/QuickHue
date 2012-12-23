@@ -12,6 +12,7 @@
 #import "DPQuickHuePresetStore.h"
 #import "DPQuickHuePreset.h"
 #import "DPQuickHueAppDelegate.h"
+#import "NSAttributedString+Hyperlink.h"
 
 NSString *const QuickHueAPIUsernamePrefKey = @"QuickHueAPIUsernamePrefKey";
 NSString *const QuickHueHostPrefKey = @"QuickHueHostPrefKey";
@@ -54,6 +55,19 @@ void updateLaunchAtLoginCheckboxFunc(LSSharedFileListRef inList, void *context) 
     else
         self.hueBridgeHostLabel.stringValue = someHost;
     [self updateLaunchAtLoginCheckbox];
+    self.twitterLabel.allowsEditingTextAttributes = YES;
+    [self.twitterLabel setSelectable:YES];
+    NSURL *twitterURL = [NSURL URLWithString:@"https://twitter.com/danparsons"];
+    NSMutableAttributedString *twitterStr = [[NSMutableAttributedString alloc] init];
+    [twitterStr appendAttributedString:[NSAttributedString hyperlinkFromString:@"@danparsons" withURL:twitterURL]];
+    self.twitterLabel.attributedStringValue = twitterStr;
+    self.githubLabel.allowsEditingTextAttributes = YES;
+    [self.githubLabel setSelectable:YES];
+    NSURL *githubURL = [NSURL URLWithString:@"https://github.com/danparsons/QuickHue"];
+    NSMutableAttributedString *githubStr = [[NSMutableAttributedString alloc] init];
+    [githubStr appendAttributedString:[NSAttributedString hyperlinkFromString:@"GitHub" withURL:githubURL]];
+    self.githubLabel.attributedStringValue = githubStr;
+    self.versionLabel.stringValue = [NSString stringWithFormat:@"QuickHue v%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]];
 }
 
 - (void)addLoginItem {
