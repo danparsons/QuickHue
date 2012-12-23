@@ -34,8 +34,8 @@
 - (void)read;
 - (void)write;
 - (void)writeAll;
-- (void)flashOnce;
+/*- (void)flashOnce;
 - (void)flashRepeatedly;
 - (void)stopFlashing;
-
+*/
 @end

@@ -11,8 +11,6 @@
 		373B60191682D7D700E07569 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 373B60171682D7D700E07569 /* InfoPlist.strings */; };
 		373B601B1682D7D700E07569 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 373B601A1682D7D700E07569 /* main.m */; };
 		373B60221682D7D700E07569 /* DPQuickHueAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 373B60211682D7D700E07569 /* DPQuickHueAppDelegate.m */; };
-		373B60321682DD7B00E07569 /* hue-logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 373B60311682DD7B00E07569 /* hue-logo@2x.png */; };
-		373B60341682DF0500E07569 /* hue-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 373B60331682DF0500E07569 /* hue-logo.png */; };
 		373B60361682E1FB00E07569 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 373B60351682E1FB00E07569 /* MainMenu.xib */; };
 		373B603F1682E41300E07569 /* DPHue.m in Sources */ = {isa = PBXBuildFile; fileRef = 373B60381682E41200E07569 /* DPHue.m */; };
 		373B60401682E41300E07569 /* DPHueLight.m in Sources */ = {isa = PBXBuildFile; fileRef = 373B603A1682E41200E07569 /* DPHueLight.m */; };
@@ -25,7 +23,6 @@
 		373B60B91685721C00E07569 /* DPQuickHuePrefsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 373B60B71685721C00E07569 /* DPQuickHuePrefsViewController.xib */; };
 		373B60E816868F1B00E07569 /* bulb.png in Resources */ = {isa = PBXBuildFile; fileRef = 373B60E616868F1A00E07569 /* bulb.png */; };
 		373B60E916868F1B00E07569 /* bulb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 373B60E716868F1B00E07569 /* bulb@2x.png */; };
-		37E4E976168691BE002ECCB8 /* appicon.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 37E4E975168691BE002ECCB8 /* appicon.iconset */; };
 		37F4DFF81686935300D508D5 /* appicon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 37F4DFF71686935300D508D5 /* appicon.icns */; };
 		B37641F120034CF093C8E105 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A22B7CA18F1463E9D41C163 /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -43,8 +40,6 @@
 		373B601C1682D7D700E07569 /* QuickHue-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QuickHue-Prefix.pch"; sourceTree = "<group>"; };
 		373B60201682D7D700E07569 /* DPQuickHueAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DPQuickHueAppDelegate.h; sourceTree = "<group>"; };
 		373B60211682D7D700E07569 /* DPQuickHueAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DPQuickHueAppDelegate.m; sourceTree = "<group>"; };
-		373B60311682DD7B00E07569 /* hue-logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hue-logo@2x.png"; sourceTree = "<group>"; };
-		373B60331682DF0500E07569 /* hue-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hue-logo.png"; sourceTree = "<group>"; };
 		373B60351682E1FB00E07569 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
 		373B60371682E41200E07569 /* DPHue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPHue.h; sourceTree = "<group>"; };
 		373B60381682E41200E07569 /* DPHue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPHue.m; sourceTree = "<group>"; };
@@ -180,8 +175,6 @@
 				373B60E616868F1A00E07569 /* bulb.png */,
 				37E4E975168691BE002ECCB8 /* appicon.iconset */,
 				373B60E716868F1B00E07569 /* bulb@2x.png */,
-				373B60331682DF0500E07569 /* hue-logo.png */,
-				373B60311682DD7B00E07569 /* hue-logo@2x.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -240,13 +233,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				373B60191682D7D700E07569 /* InfoPlist.strings in Resources */,
-				373B60321682DD7B00E07569 /* hue-logo@2x.png in Resources */,
-				373B60341682DF0500E07569 /* hue-logo.png in Resources */,
 				373B60361682E1FB00E07569 /* MainMenu.xib in Resources */,
 				373B60B91685721C00E07569 /* DPQuickHuePrefsViewController.xib in Resources */,
 				373B60E816868F1B00E07569 /* bulb.png in Resources */,
 				373B60E916868F1B00E07569 /* bulb@2x.png in Resources */,
-				37E4E976168691BE002ECCB8 /* appicon.iconset in Resources */,
 				37F4DFF81686935300D508D5 /* appicon.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
