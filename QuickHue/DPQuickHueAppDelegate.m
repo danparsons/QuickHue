@@ -28,7 +28,7 @@ extern NSString * const QuickHueHostPrefKey;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     self.statusBar = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
-    self.statusBar.image = [NSImage imageNamed:@"hue-logo"];
+    self.statusBar.image = [NSImage imageNamed:@"bulb"];
     self.statusBar.highlightMode = YES;
     [self buildMenu];
     
