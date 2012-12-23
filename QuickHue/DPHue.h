@@ -16,7 +16,7 @@
 @property (nonatomic, strong, readonly) NSString *deviceType;
 @property (nonatomic, strong, readonly) NSURL *getURL;
 @property (nonatomic, strong, readonly) NSURL *putURL;
-@property (nonatomic, strong, readonly) NSString *host;
+@property (nonatomic, strong) NSString *host;
 @property (nonatomic, strong, readonly) NSString *swversion;
 @property (nonatomic, strong, readonly) NSArray *lights;
 @property (nonatomic, readonly) BOOL authenticated;

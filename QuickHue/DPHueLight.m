@@ -37,17 +37,20 @@
 
 - (NSString *)description {
     NSMutableString *descr = [[NSMutableString alloc] init];
-    [descr appendFormat:@"Name: %@\n", self.name];
-    [descr appendFormat:@"Type: %@\n", self.type];
-    [descr appendFormat:@"Version: %@\n", self.swversion];
-    [descr appendFormat:@"Model ID: %@\n", self.modelid];
-    [descr appendFormat:@"On: %@\n", self.on ? @"True" : @"False"];
-    [descr appendFormat:@"Brightness: %@\n", self.brightness];
-    [descr appendFormat:@"Color Mode: %@\n", self.colorMode];
-    [descr appendFormat:@"Hue: %@\n", self.hue];
-    [descr appendFormat:@"Saturation: %@\n", self.saturation];
-    [descr appendFormat:@"Color Temperature: %@\n", self.colorTemperature];
-    [descr appendFormat:@"xy: %@\n", self.xy];
+    [descr appendFormat:@"Light Name: %@\n", self.name];
+    [descr appendFormat:@"\tgetURL: %@\n", self.getURL];
+    [descr appendFormat:@"\tputURL: %@\n", self.putURL];
+    [descr appendFormat:@"\tNumber: %@\n", self.number];
+    [descr appendFormat:@"\tType: %@\n", self.type];
+    [descr appendFormat:@"\tVersion: %@\n", self.swversion];
+    [descr appendFormat:@"\tModel ID: %@\n", self.modelid];
+    [descr appendFormat:@"\tOn: %@\n", self.on ? @"True" : @"False"];
+    [descr appendFormat:@"\tBrightness: %@\n", self.brightness];
+    [descr appendFormat:@"\tColor Mode: %@\n", self.colorMode];
+    [descr appendFormat:@"\tHue: %@\n", self.hue];
+    [descr appendFormat:@"\tSaturation: %@\n", self.saturation];
+    [descr appendFormat:@"\tColor Temperature: %@\n", self.colorTemperature];
+    [descr appendFormat:@"\txy: %@\n", self.xy];
     return descr;
 }
 

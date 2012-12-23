@@ -41,7 +41,7 @@ extern NSString * const QuickHueHostPrefKey;
     }
     self.pvc = [[DPQuickHuePrefsViewController alloc] init];
     WSLog(@"Username: %@", [DPHue generateUsername]);
-    [self preferences];
+    //[self preferences];
 }
 
 - (void)buildMenu {
@@ -102,7 +102,18 @@ extern NSString * const QuickHueHostPrefKey;
 }
 
 - (void)debug1 {
-    //DPHue *someHue = [[DPHue alloc] initWith]
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    DPHue *someHue = [[DPHue alloc] initWithHueIP:[prefs objectForKey:QuickHueHostPrefKey] username:[prefs objectForKey:QuickHueAPIUsernamePrefKey]];
+    [someHue readWithCompletion:^(DPHue *hue, NSError *err) {
+        NSLog(@"Read complete:\n%@", hue);
+        NSLog(@"Changing host\n");
+        hue.host = @"123.245.222.212";
+        NSLog(@"%@\n", hue);
+        NSLog(@"Changing username\n");
+        hue.username = @"foofity";
+        NSLog(@"%@\n", hue);
+        
+    }];
 }
 
 #pragma mark - DPHueDiscoverDelegate

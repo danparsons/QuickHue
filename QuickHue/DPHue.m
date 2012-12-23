@@ -16,7 +16,6 @@
 @property (nonatomic, strong, readwrite) NSString *deviceType;
 @property (nonatomic, strong, readwrite) NSURL *getURL;
 @property (nonatomic, strong, readwrite) NSURL *putURL;
-@property (nonatomic, strong, readwrite) NSString *host;
 @property (nonatomic, strong, readwrite) NSString *swversion;
 @property (nonatomic, strong, readwrite) NSArray *lights;
 @property (nonatomic, readwrite) BOOL authenticated;
@@ -39,7 +38,7 @@
 
 - (void)readWithCompletion:(void (^)(DPHue *, NSError *))block {
     NSURLRequest *req = [NSURLRequest requestWithURL:self.getURL];
-    NSLog(@"%@", self.getURL);
+    WSLog(@"Reading %@", self.getURL);
     DPJSONConnection *connection = [[DPJSONConnection alloc] initWithRequest:req];
     connection.completionBlock = block;
     connection.jsonRootObject = self;
@@ -101,6 +100,10 @@
 - (void)updateURLs {
     _getURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/api/%@", self.host, self.username]];
     _putURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/api/%@/config", self.host, self.username]];
+    for (DPHueLight *light in self.lights) {
+        light.host = self.host;
+        light.username = self.username;
+    }
 }
 
 - (void)setUsername:(NSString *)username {
@@ -128,16 +131,16 @@
         self->_authenticated = YES;
     self->_swversion = d[@"config"][@"swversion"];
     NSMutableArray *tmpLights = [[NSMutableArray alloc] init];
-    for (NSDictionary *lightDict in d[@"lights"]) {
+    for (id lightItem in d[@"lights"]) {
         DPHueLight *light = [[DPHueLight alloc] init];
-        [light readFromJSONDictionary:d[@"lights"][lightDict]];
+        [light readFromJSONDictionary:d[@"lights"][lightItem]];
         /*NSString *getURLString = [NSString stringWithFormat:@"http://%@/api/%@/lights/%@", self.host, self.username, lightDict];
         light.getURL = [NSURL URLWithString:getURLString];
         light.putURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/state", getURLString]];
         */
         NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
         f.numberStyle = NSNumberFormatterDecimalStyle;
-        light.number = [f numberFromString:[lightDict allKeys][0]];
+        light.number = [f numberFromString:lightItem];
         light.username = self.username;
         light.host = self.host;
         [tmpLights addObject:light];
