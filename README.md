@@ -5,6 +5,10 @@ QuickHue is an OS X menu bar utility for controlling the Philips Hue lighting sy
 
 For example, I have an "Energize" preset which sets all lamps to a very cool color temperature, an "Evening" preset which sets a warm color temperature, a "Relax" preset which sets a warm color temperature and low brightness. You can make presets of whatever you want and name them whatever you want.
 
+![Menu screenshot](https://raw.github.com/danparsons/QuickHue/master/Screenshots/menu.png)
+![Prefs screenshot](https://raw.github.com/danparsons/QuickHue/master/Screenshots/prefs.png)
+
+
 Demonstration video: http://www.youtube.com/watch?v=zHUVcE28W9k
 
 Download
