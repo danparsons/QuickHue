@@ -9,7 +9,10 @@
 #ifndef Nerdfeed_WSLog_h
 #define Nerdfeed_WSLog_h
 
+#ifdef DEBUG
 #define WSLog(...) NSLog(__VA_ARGS__)
-//#define WSLog(...) do {} while(0)
+#else
+#define WSLog(...) do {} while(0)
+#endif
 
 #endif

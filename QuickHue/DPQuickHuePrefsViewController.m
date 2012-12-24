@@ -124,11 +124,12 @@ void updateLaunchAtLoginCheckboxFunc(LSSharedFileListRef inList, void *context) 
     return NO;
 }
 
-- (void)discoveryTimeElapsed {
+- (void)discoveryTimeHasElapsed {
     self.dhd = nil;
     [self.timer invalidate];
     [self.discoveryProgressIndicator stopAnimation:self];
-    self.discoveryStatusLabel.stringValue = @"Failed to find Hue";
+    if (!self.foundHueHost)
+        self.discoveryStatusLabel.stringValue = @"Failed to find Hue";
 }
 
 #pragma mark - IBActions
@@ -157,7 +158,7 @@ void updateLaunchAtLoginCheckboxFunc(LSSharedFileListRef inList, void *context) 
 - (IBAction)startDiscovery:(id)sender {
     self.dhd = [[DPHueDiscover alloc] initWithDelegate:self];
     [self.dhd discoverForDuration:30 withCompletion:^{
-        [self discoveryTimeElapsed];
+        [self discoveryTimeHasElapsed];
     }];
     [self.discoveryProgressIndicator startAnimation:self];
     self.discoveryStatusLabel.stringValue = @"Searching for Hue...";
@@ -174,7 +175,7 @@ void updateLaunchAtLoginCheckboxFunc(LSSharedFileListRef inList, void *context) 
 }
 
 - (IBAction)saveDiscovery:(id)sender {
-    NSLog(@"Saving %@", self.foundHueHost);
+    WSLog(@"Saving %@", self.foundHueHost);
     [[NSUserDefaults standardUserDefaults] setObject:self.foundHueHost forKey:QuickHueHostPrefKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
     self.hueBridgeHostLabel.stringValue = self.foundHueHost;
