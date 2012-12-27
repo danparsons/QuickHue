@@ -21,6 +21,7 @@ NSString *const QuickHueHostPrefKey = @"QuickHueHostPrefKey";
 @property (nonatomic, strong) DPHueDiscover *dhd;
 @property (nonatomic, strong) NSString *foundHueHost;
 @property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, strong) DPHue *touchlinkHue;
 @end
 
 @implementation DPQuickHuePrefsViewController
@@ -209,6 +210,29 @@ void updateLaunchAtLoginCheckboxFunc(LSSharedFileListRef inList, void *context) 
         self.launchAtLoginCheckbox.state = YES;
     else
         self.launchAtLoginCheckbox.state = NO;
+}
+
+- (IBAction)triggerTouchlink:(id)sender {
+    NSString *someHost = [[NSUserDefaults standardUserDefaults] objectForKey:QuickHueHostPrefKey];
+    self.touchlinkHue = [[DPHue alloc] initWithHueIP:someHost username:[[NSUserDefaults standardUserDefaults] objectForKey:QuickHueAPIUsernamePrefKey]];
+    [self.touchlinkProgressIndicator startAnimation:self];
+    [self.touchlinkProgressIndicator setHidden:NO];
+    [self.touchlinkHue triggerTouchlinkWithCompletion:^(BOOL success, NSString *result) {
+        if (success) {
+            WSLog(@"Touchlink found bulbs!");
+            self.touchlinkStatusLabel.stringValue = @"Touchlink found bulbs!";
+        }
+        else {
+            WSLog(@"Touchlink failed to find bulbs");
+            self.touchlinkStatusLabel.stringValue = @"Touchlink failed to find bulbs";
+        }
+        [self.touchlinkProgressIndicator stopAnimation:self];
+        [self.touchlinkProgressIndicator setHidden:YES];
+        self.touchlinkMessageLabel.stringValue = [NSString stringWithFormat:@"Result from Hue: %@", result];
+        [self.popoverController showRelativeToRect:self.triggerTouchlinkButton.bounds ofView:self.triggerTouchlinkButton preferredEdge:NSMaxYEdge];
+        self.touchlinkHue = nil;
+        
+    }];
 }
 
 - (IBAction)tableViewSelected:(id)sender {

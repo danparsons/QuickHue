@@ -10,6 +10,7 @@
 #import "DPHueLight.h"
 #import "DPJSONConnection.h"
 #import "NSString+MD5.h"
+#import <CocoaAsyncSocket/GCDAsyncSocket.h>
 
 @interface DPHue ()
 @property (nonatomic, strong, readwrite) NSString *name;
@@ -18,7 +19,9 @@
 @property (nonatomic, strong, readwrite) NSURL *putURL;
 @property (nonatomic, strong, readwrite) NSString *swversion;
 @property (nonatomic, strong, readwrite) NSArray *lights;
+@property (nonatomic, strong) GCDAsyncSocket *socket;
 @property (nonatomic, readwrite) BOOL authenticated;
+@property (nonatomic, strong) void (^touchLightCompletionBlock)(BOOL success, NSString *result);
 
 @end
 
@@ -114,6 +117,57 @@
 - (void)setHost:(NSString *)host {
     _host = host;
     [self updateURLs];
+}
+
+- (void)triggerTouchlinkWithCompletion:(void (^)(BOOL success, NSString *))block {
+    WSLog(@"Triggering Touchlink");
+    self.socket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
+    NSError *err = nil;
+    if (![self.socket connectToHost:self.host onPort:30000 withTimeout:5 error:&err]) {
+        NSLog(@"Error connecting to %@:30000 %@", self.host, err);
+        return;
+    }
+    self.touchLightCompletionBlock = block;
+    // After 5 seconds, stop
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * 10), dispatch_get_current_queue(), ^{
+        if (self.socket) {
+            self.touchLightCompletionBlock(NO, @"No response after 10 sec");
+            [self.socket disconnect];
+            self.socket = nil;
+        }
+    });
+}
+
+
+#pragma mark - GCDAsyncSocketDelegate
+
+- (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
+    WSLog(@"Connected to %@:%d", host, port);
+    NSData *data = [@"[Link,Touchlink]\n" dataUsingEncoding:NSUTF8StringEncoding];
+    [sock writeData:data withTimeout:-1 tag:-1];
+    NSMutableData *buffy = [[NSMutableData alloc] init];
+    [self.socket readDataToData:[GCDAsyncSocket LFData] withTimeout:5 buffer:buffy bufferOffset:0 tag:-1];
+    WSLog(@"Sending: %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+}
+
+- (void)socket:(GCDAsyncSocket *)sender didReadData:(NSData *)data withTag:(long)tag {
+    NSMutableData *buffy = [[NSMutableData alloc] init];
+    NSString *resultMsg = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    WSLog(@"Received string: %@", resultMsg);
+    if ([resultMsg rangeOfString:@"[Link,Touchlink,success"].location != NSNotFound) {
+        // Touchlink found bulbs
+        self.touchLightCompletionBlock(YES, resultMsg);
+        [self.socket disconnect];
+        self.socket = nil;
+    } else if ([resultMsg rangeOfString:@"[Link,Touchlink,failed"].location != NSNotFound) {
+        // Touchlink failed to find bulbs
+        self.touchLightCompletionBlock(NO, resultMsg);
+        [self.socket disconnect];
+        self.socket = nil;
+    } else {
+        // We do not have a Touchlink result message yet, so keep receiving
+        [self.socket readDataToData:[GCDAsyncSocket LFData] withTimeout:5 buffer:buffy bufferOffset:0 tag:-1];
+    }
 }
 
 #pragma mark - DPJSONSerializable

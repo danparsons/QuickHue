@@ -24,13 +24,20 @@
 @property (weak) IBOutlet NSTextField *twitterLabel;
 @property (weak) IBOutlet NSTextField *githubLabel;
 @property (weak) IBOutlet NSTextField *versionLabel;
+@property (strong) IBOutlet NSPanel *touchlinkStatusWindow;
+@property (weak) IBOutlet NSButton *triggerTouchlinkButton;
+@property (strong) IBOutlet NSPopover *popoverController;
+@property (weak) IBOutlet NSTextField *touchlinkStatusLabel;
+@property (weak) IBOutlet NSTextField *touchlinkMessageLabel;
+@property (weak) IBOutlet NSProgressIndicator *touchlinkProgressIndicator;
+
 - (IBAction)addPreset:(id)sender;
 - (IBAction)removePreset:(id)sender;
 - (IBAction)tableViewSelected:(id)sender;
 - (IBAction)startAtLoginClicked:(id)sender;
 - (IBAction)startDiscovery:(id)sender;
 - (void)updateLaunchAtLoginCheckbox;
-
+- (IBAction)triggerTouchlink:(id)sender;
 
 
 

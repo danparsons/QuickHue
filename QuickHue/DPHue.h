@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CocoaAsyncSocket/GCDAsyncSocket.h>
 #import "DPJSONSerializable.h"
 
-@interface DPHue : NSObject <DPJSONSerializable, NSCoding>
+@interface DPHue : NSObject <DPJSONSerializable, NSCoding, GCDAsyncSocketDelegate>
 
 @property (nonatomic, strong, readonly) NSString *name;
 @property (nonatomic, strong) NSString *username;
@@ -29,5 +30,6 @@
 - (void)allLightsOff;
 - (void)allLightsOn;
 - (void)writeAll;
+- (void)triggerTouchlinkWithCompletion:(void (^)(BOOL success, NSString *result))block;
 
 @end
