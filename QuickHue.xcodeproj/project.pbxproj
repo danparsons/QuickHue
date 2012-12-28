@@ -23,6 +23,7 @@
 		373B60B91685721C00E07569 /* DPQuickHuePrefsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 373B60B71685721C00E07569 /* DPQuickHuePrefsViewController.xib */; };
 		373B60E816868F1B00E07569 /* bulb.png in Resources */ = {isa = PBXBuildFile; fileRef = 373B60E616868F1A00E07569 /* bulb.png */; };
 		373B60E916868F1B00E07569 /* bulb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 373B60E716868F1B00E07569 /* bulb@2x.png */; };
+		37AADDE6168D08EC0043F9FF /* DPHueNUPNP.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AADDE5168D08EC0043F9FF /* DPHueNUPNP.m */; };
 		37F4DFF81686935300D508D5 /* appicon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 37F4DFF71686935300D508D5 /* appicon.icns */; };
 		37F4DFFB1686E65900D508D5 /* checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 37F4DFF91686E65900D508D5 /* checkmark.png */; };
 		37F4DFFC1686E65900D508D5 /* checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37F4DFFA1686E65900D508D5 /* checkmark@2x.png */; };
@@ -65,6 +66,8 @@
 		373B60B71685721C00E07569 /* DPQuickHuePrefsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DPQuickHuePrefsViewController.xib; sourceTree = "<group>"; };
 		373B60E616868F1A00E07569 /* bulb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bulb.png; path = Images/bulb.png; sourceTree = "<group>"; };
 		373B60E716868F1B00E07569 /* bulb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bulb@2x.png"; path = "Images/bulb@2x.png"; sourceTree = "<group>"; };
+		37AADDE4168D08EC0043F9FF /* DPHueNUPNP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPHueNUPNP.h; sourceTree = "<group>"; };
+		37AADDE5168D08EC0043F9FF /* DPHueNUPNP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPHueNUPNP.m; sourceTree = "<group>"; };
 		37E4E975168691BE002ECCB8 /* appicon.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; name = appicon.iconset; path = Images/appicon.iconset; sourceTree = "<group>"; };
 		37F4DFF71686935300D508D5 /* appicon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = appicon.icns; path = ../appicon.icns; sourceTree = "<group>"; };
 		37F4DFF91686E65900D508D5 /* checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = checkmark.png; path = Images/checkmark.png; sourceTree = "<group>"; };
@@ -173,6 +176,8 @@
 				373B603A1682E41200E07569 /* DPHueLight.m */,
 				373B60601685175A00E07569 /* DPHueDiscover.h */,
 				373B60611685175A00E07569 /* DPHueDiscover.m */,
+				37AADDE4168D08EC0043F9FF /* DPHueNUPNP.h */,
+				37AADDE5168D08EC0043F9FF /* DPHueNUPNP.m */,
 			);
 			name = DPHue;
 			sourceTree = "<group>";
@@ -289,6 +294,7 @@
 				373B607F16855FE100E07569 /* NSString+MD5.m in Sources */,
 				373B60B81685721C00E07569 /* DPQuickHuePrefsViewController.m in Sources */,
 				37F4E0031686FD8600D508D5 /* NSAttributedString+Hyperlink.m in Sources */,
+				37AADDE6168D08EC0043F9FF /* DPHueNUPNP.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

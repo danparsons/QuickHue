@@ -172,7 +172,7 @@
 
 #pragma mark - DPJSONSerializable
 
-- (void)readFromJSONDictionary:(id) d {
+- (void)readFromJSONDictionary:(id)d {
     if (![d respondsToSelector:@selector(objectForKeyedSubscript:)]) {
         // We were given an array, not a dict, which means
         // Hue is giving us a result array, which (in this case)

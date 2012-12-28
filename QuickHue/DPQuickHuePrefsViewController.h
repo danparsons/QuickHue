@@ -46,9 +46,11 @@
 @property (weak) IBOutlet NSTextField *discoveryStatusLabel;
 @property (weak) IBOutlet NSButton *discoverySaveButton;
 @property (weak) IBOutlet NSImageView *successCheckmarkImage;
+@property (weak) IBOutlet NSButton *viewDiscoveryLogButton;
 
 - (IBAction)cancelDiscovery:(id)sender;
 - (IBAction)saveDiscovery:(id)sender;
+- (IBAction)viewDiscoveryLog:(id)sender;
 
 
 

@@ -127,7 +127,7 @@ extern NSString * const QuickHueHostPrefKey;
 
 #pragma mark - DPHueDiscoverDelegate
 
-- (void)foundHueAt:(NSString *)host {
+- (void)foundHueAt:(NSString *)host discoveryLog:(NSString *)log {
     WSLog(@"Hue found: %@", host);
 }
 

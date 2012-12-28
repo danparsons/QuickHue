@@ -22,6 +22,7 @@ NSString *const QuickHueHostPrefKey = @"QuickHueHostPrefKey";
 @property (nonatomic, strong) NSString *foundHueHost;
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, strong) DPHue *touchlinkHue;
+@property (nonatomic, strong) NSMutableString *discoveryLog;
 @end
 
 @implementation DPQuickHuePrefsViewController
@@ -129,8 +130,10 @@ void updateLaunchAtLoginCheckboxFunc(LSSharedFileListRef inList, void *context) 
     self.dhd = nil;
     [self.timer invalidate];
     [self.discoveryProgressIndicator stopAnimation:self];
-    if (!self.foundHueHost)
+    if (!self.foundHueHost) {
         self.discoveryStatusLabel.stringValue = @"Failed to find Hue";
+        [self.viewDiscoveryLogButton setHidden:NO];
+    }
 }
 
 #pragma mark - IBActions
@@ -186,23 +189,31 @@ void updateLaunchAtLoginCheckboxFunc(LSSharedFileListRef inList, void *context) 
     [self.discoverySheet orderOut:sender];
 }
 
+- (IBAction)viewDiscoveryLog:(id)sender {
+    NSLog(@"%@", self.discoveryLog);
+}
+
 - (void)createUsernameAt:(NSTimer *)timer {
     NSString *host = timer.userInfo;
     WSLog(@"Attempting to create username at %@", host);
+    [self.discoveryLog appendFormat:@"%@: Attempting to authenticate to %@\n", [NSDate date], host];
     DPHue *someHue = [[DPHue alloc] initWithHueIP:host username:[[NSUserDefaults standardUserDefaults] objectForKey:QuickHueAPIUsernamePrefKey]];
     [someHue readWithCompletion:^(DPHue *hue, NSError *err) {
         if (hue.authenticated) {
+            [self.discoveryLog appendFormat:@"%@: Successfully authenticated\n", [NSDate date]];
             [self.timer invalidate];
             [self.discoveryProgressIndicator stopAnimation:self];
             [self.discoverySaveButton setEnabled:YES];
             self.foundHueHost = hue.host;
             self.discoveryStatusLabel.stringValue = [NSString stringWithFormat:@"Found Hue at %@, named '%@'!", hue.host, hue.name];
             [self.successCheckmarkImage setHidden:NO];
+            [self.viewDiscoveryLogButton setHidden:NO]; 
         } else {
+            [self.discoveryLog appendFormat:@"%@: Authentication failed, will try to create username\n", [NSDate date]];
             [someHue registerUsername];
             self.discoveryStatusLabel.stringValue = @"Press Button On Hue!";
         }
-    }];    
+    }];
 }
 
 - (void)updateLaunchAtLoginCheckbox {
@@ -255,7 +266,8 @@ void updateLaunchAtLoginCheckboxFunc(LSSharedFileListRef inList, void *context) 
 
 #pragma mark - DPHueDiscover delegate
 
-- (void)foundHueAt:(NSString *)host {
+- (void)foundHueAt:(NSString *)host discoveryLog:(NSMutableString *)log {
+    self.discoveryLog = log;
     [self.discoveryProgressIndicator startAnimation:self];
     [self.discoverySaveButton setEnabled:NO];
     self.discoveryStatusLabel.stringValue = @"Hue Found! Authenticating...";
