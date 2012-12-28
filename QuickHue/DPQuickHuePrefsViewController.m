@@ -190,7 +190,9 @@ void updateLaunchAtLoginCheckboxFunc(LSSharedFileListRef inList, void *context) 
 }
 
 - (IBAction)viewDiscoveryLog:(id)sender {
-    NSLog(@"%@", self.discoveryLog);
+    self.discoveryLogTextView.string = self.discoveryLog;
+    self.discoveryLogWindow.collectionBehavior = NSWindowCollectionBehaviorCanJoinAllSpaces;
+    [self.discoveryLogWindow makeKeyAndOrderFront:self];
 }
 
 - (void)createUsernameAt:(NSTimer *)timer {

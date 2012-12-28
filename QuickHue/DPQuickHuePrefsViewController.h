@@ -47,6 +47,8 @@
 @property (weak) IBOutlet NSButton *discoverySaveButton;
 @property (weak) IBOutlet NSImageView *successCheckmarkImage;
 @property (weak) IBOutlet NSButton *viewDiscoveryLogButton;
+@property (strong) IBOutlet NSWindow *discoveryLogWindow;
+@property (unsafe_unretained) IBOutlet NSTextView *discoveryLogTextView;
 
 - (IBAction)cancelDiscovery:(id)sender;
 - (IBAction)saveDiscovery:(id)sender;
