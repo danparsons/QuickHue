@@ -161,7 +161,7 @@ void updateLaunchAtLoginCheckboxFunc(LSSharedFileListRef inList, void *context) 
 
 - (IBAction)startDiscovery:(id)sender {
     self.dhd = [[DPHueDiscover alloc] initWithDelegate:self];
-    [self.dhd discoverForDuration:30 withCompletion:^(NSMutableString *log) {
+    [self.dhd discoverForDuration:10 withCompletion:^(NSMutableString *log) {
         self.discoveryLog = log;
         [self discoveryTimeHasElapsed];
     }];

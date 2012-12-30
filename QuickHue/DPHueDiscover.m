@@ -43,25 +43,26 @@
             if ([self.delegate respondsToSelector:@selector(foundHueAt:discoveryLog:)]) {
                 [self.delegate foundHueAt:pnp.hueIP discoveryLog:self.log];
             }
-            NSURL *url = [NSURL URLWithString:pnp.hueIP];
-            [self searchForHueAt:url];
         } else {
             [self.log appendFormat:@"%@: Received response from web service, but no IP\n", [NSDate date]];
+            [self startSSDPDiscovery];
         }
     };
     [self.log appendFormat:@"%@: Making request to %@\n", [NSDate date], req];
     [connection start];
-    /* Old, SSDP method
-    self.udpSocket = [self createSocket];
-    NSString *msg = @"M-SEARCH * HTTP/1.1\r\nHost: 239.255.255.250:1900\r\nMan: ssdp:discover\r\nMx: 3\r\nST: \"ssdp:all\"\r\n\r\n";
-    NSData *msgData = [msg dataUsingEncoding:NSUTF8StringEncoding];
-    [self.udpSocket sendData:msgData toHost:@"239.255.255.250" port:1900 withTimeout:-1 tag:0];
-    */
     // seconds seconds later, stop discovering
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, seconds * NSEC_PER_SEC), dispatch_get_current_queue(), ^{
         block(self.log);
         [self stopDiscovery];
     });
+}
+
+- (void)startSSDPDiscovery {
+    [self.log appendFormat:@"%@: Starting SSDP discovery\n", [NSDate date]];
+    self.udpSocket = [self createSocket];
+    NSString *msg = @"M-SEARCH * HTTP/1.1\r\nHost: 239.255.255.250:1900\r\nMan: ssdp:discover\r\nMx: 3\r\nST: \"ssdp:all\"\r\n\r\n";
+    NSData *msgData = [msg dataUsingEncoding:NSUTF8StringEncoding];
+    [self.udpSocket sendData:msgData toHost:@"239.255.255.250" port:1900 withTimeout:-1 tag:0];
 }
 
 - (void)stopDiscovery {
@@ -88,11 +89,13 @@
 - (void)searchForHueAt:(NSURL *)url {
     NSURLRequest *req = [NSURLRequest requestWithURL:url];
     DPJSONConnection *connection = [[DPJSONConnection alloc] initWithRequest:req];
+    [self.log appendFormat:@"%@: Searching for Hue controller at %@\n", [NSDate date], url];
     connection.completionBlock = ^(NSData *data, NSError *err) {
         NSString *msg = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         // If this string is found, then url == hue!
         if ([msg rangeOfString:@"Philips hue bridge 2012"].location != NSNotFound) {
-            if ([self.delegate respondsToSelector:@selector(foundHueAt:)]) {
+            [self.log appendFormat:@"%@: Found hue at %@!\n", [NSDate date], url.host];
+            if ([self.delegate respondsToSelector:@selector(foundHueAt:discoveryLog:)]) {
                 if (!self.foundHue) {
                     [self.delegate foundHueAt:url.host discoveryLog:self.log];
                     self.foundHue = YES;
@@ -100,6 +103,7 @@
             }
         } else {
             // Host is not a Hue
+            [self.log appendFormat:@"%@: Host %@ is not a Hue\n", [NSDate date], url.host];
         }
     };
     [connection start];
@@ -110,6 +114,7 @@
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock didReceiveData:(NSData *)data fromAddress:(NSData *)address withFilterContext:(id)filterContext {
     NSString *msg = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     if (msg) {
+        [self.log appendFormat:@"%@: Received UDP data\n", [NSDate date]];
         //NSRegularExpression *reg = [[NSRegularExpression alloc] initWithPattern:@"LOCATION:(.*?)xml" options:0 error:nil];
         NSRegularExpression *reg = [[NSRegularExpression alloc] initWithPattern:@"http:\\/\\/(.*?)description\\.xml" options:0 error:nil];
         NSArray *matches = [reg matchesInString:msg options:0 range:NSMakeRange(0, msg.length)];
@@ -117,6 +122,7 @@
             NSTextCheckingResult *result = matches[0];
             NSString *matched = [msg substringWithRange:[result rangeAtIndex:0]];
             NSURL *url = [NSURL URLWithString:matched];
+            [self.log appendFormat:@"%@: Possibly found a Hue controller, verifying...\n", [NSDate date]];
             [self searchForHueAt:url];
         }
     }
