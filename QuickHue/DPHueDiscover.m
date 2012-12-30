@@ -28,7 +28,7 @@
     return self;
 }
 
-- (void)discoverForDuration:(int)seconds withCompletion:(void (^)())block {
+- (void)discoverForDuration:(int)seconds withCompletion:(void (^)(NSMutableString *log))block {
     WSLog(@"Starting discovery");
     [self.log appendFormat:@"%@: Starting disovery\n", [NSDate date]];
     NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.meethue.com/api/nupnp"]];
@@ -59,7 +59,7 @@
     */
     // seconds seconds later, stop discovering
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, seconds * NSEC_PER_SEC), dispatch_get_current_queue(), ^{
-        block();
+        block(self.log);
         [self stopDiscovery];
     });
 }
