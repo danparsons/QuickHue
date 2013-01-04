@@ -15,7 +15,7 @@
 #import "DPQuickHuePrefsViewController.h"
 
 @interface DPQuickHueAppDelegate ()
-@property (nonatomic, strong) NSStatusItem *statusBar;
+@property (nonatomic, strong) NSStatusItem *statusItem;
 @property (nonatomic, strong) NSMenu *statusBarMenu;
 @property (nonatomic, strong) DPQuickHuePrefsViewController *pvc;
 @property (nonatomic, strong) DPHueDiscover *dhd;
@@ -23,19 +23,31 @@
 
 extern NSString * const QuickHueAPIUsernamePrefKey;
 extern NSString * const QuickHueHostPrefKey;
+extern NSString * const QuickHueUseBlackAndWhiteMenuBarIconsKey;
 
 @implementation DPQuickHueAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    self.statusBar = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
-    self.statusBar.image = [NSImage imageNamed:@"bulb"];
-    self.statusBar.highlightMode = YES;
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+
+    self.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
+
+    if([prefs boolForKey:QuickHueUseBlackAndWhiteMenuBarIconsKey]) {
+        self.statusItem.image = [NSImage imageNamed:@"bulb-black"];
+        self.statusItem.alternateImage = [NSImage imageNamed:@"bulb-white"];
+    } else {
+        self.statusItem.image = [NSImage imageNamed:@"bulb"];
+        self.statusItem.alternateImage = [NSImage imageNamed:@"bulb"];
+    }
+
+    self.statusItem.highlightMode = YES;
+    
     [self buildMenu];
     
     self.pvc = [[DPQuickHuePrefsViewController alloc] init];
+    self.pvc.statusItem = self.statusItem;
     self.pvc.delegate = self;
 
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     if ( (![prefs objectForKey:QuickHueAPIUsernamePrefKey]) ||
         (![prefs objectForKey:QuickHueHostPrefKey])) {
         self.pvc.firstRun = YES;
@@ -68,7 +80,7 @@ extern NSString * const QuickHueHostPrefKey;
     [self.statusBarMenu addItem:[[NSMenuItem alloc] initWithTitle:@"Create Preset" action:@selector(createPreset) keyEquivalent:@""]];
     [self.statusBarMenu addItem:[[NSMenuItem alloc] initWithTitle:@"Preferences..." action:@selector(preferences) keyEquivalent:@""]];
     [self.statusBarMenu addItem:[[NSMenuItem alloc] initWithTitle:@"Quit" action:@selector(terminate:) keyEquivalent:@""]];
-    self.statusBar.menu = self.statusBarMenu;
+    self.statusItem.menu = self.statusBarMenu;
 }
 
 - (void)applyPreset:(id)sender {

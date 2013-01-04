@@ -13,12 +13,15 @@
 
 @property (nonatomic) BOOL firstRun;
 
+@property (nonatomic, strong) NSStatusItem *statusItem; //for modifying black and white vs. color state
+
 // Properties of main prefs window
 @property (nonatomic, strong) id delegate;
 @property (weak) IBOutlet NSWindow *window;
 @property (weak) IBOutlet NSPanel *discoverySheet;
 @property (weak) IBOutlet NSTextField *hueBridgeHostLabel;
 @property (weak) IBOutlet NSButton *launchAtLoginCheckbox;
+@property (weak) IBOutlet NSButton *useBlackAndWhiteMenuBarIconsCheckbox;
 @property (weak) IBOutlet NSTableView *presetsTableView;
 @property (weak) IBOutlet NSButton *removePresetButton;
 @property (weak) IBOutlet NSTextField *twitterLabel;
@@ -35,10 +38,10 @@
 - (IBAction)removePreset:(id)sender;
 - (IBAction)tableViewSelected:(id)sender;
 - (IBAction)startAtLoginClicked:(id)sender;
+- (IBAction)useBlackAndWhiteMenuBarIconsClicked:(id)sender;
 - (IBAction)startDiscovery:(id)sender;
 - (void)updateLaunchAtLoginCheckbox;
 - (IBAction)triggerTouchlink:(id)sender;
-
 
 
 // Properties of sheet
