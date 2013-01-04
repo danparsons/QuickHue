@@ -24,7 +24,7 @@
 @property (weak) IBOutlet NSButton *useBlackAndWhiteMenuBarIconsCheckbox;
 @property (weak) IBOutlet NSTableView *presetsTableView;
 @property (weak) IBOutlet NSButton *removePresetButton;
-@property (weak) IBOutlet NSTextField *twitterLabel;
+@property (weak) IBOutlet NSTextField *creditsLabel;
 @property (weak) IBOutlet NSTextField *githubLabel;
 @property (weak) IBOutlet NSTextField *versionLabel;
 @property (strong) IBOutlet NSPanel *touchlinkStatusWindow;

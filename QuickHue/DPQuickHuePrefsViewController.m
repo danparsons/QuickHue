@@ -58,19 +58,25 @@ void updateLaunchAtLoginCheckboxFunc(LSSharedFileListRef inList, void *context) 
     else
         self.hueBridgeHostLabel.stringValue = someHost;
     [self updateLaunchAtLoginCheckbox];
-    self.twitterLabel.allowsEditingTextAttributes = YES;
-    [self.twitterLabel setSelectable:YES];
+    self.creditsLabel.allowsEditingTextAttributes = YES;
+    [self.creditsLabel setSelectable:YES];
     NSURL *twitterURL = [NSURL URLWithString:@"https://twitter.com/danparsons"];
-    NSMutableAttributedString *twitterStr = [[NSMutableAttributedString alloc] init];
-    [twitterStr appendAttributedString:[NSAttributedString hyperlinkFromString:@"@danparsons" withURL:twitterURL]];
-    self.twitterLabel.attributedStringValue = twitterStr;
-    [self.twitterLabel sizeToFit];
+    NSURL *otherAuthors = [NSURL URLWithString:@"https://github.com/danparsons/QuickHue/pulls?direction=desc&page=1&sort=created&state=closed"];
+    NSMutableAttributedString *creditsStr = [[NSMutableAttributedString alloc] init];
+    [creditsStr appendAttributedString:[[NSAttributedString alloc] initWithString:@"by "]];
+    [creditsStr appendAttributedString:[NSAttributedString hyperlinkFromString:@"@danparsons" withURL:twitterURL]];
+    [creditsStr appendAttributedString:[[NSAttributedString alloc] initWithString:@" and"]];
+    [creditsStr appendAttributedString:[NSAttributedString hyperlinkFromString:@" contributors" withURL:otherAuthors]];
+    self.creditsLabel.attributedStringValue = creditsStr;
+    [self.creditsLabel sizeToFit];
     
     self.githubLabel.allowsEditingTextAttributes = YES;
     [self.githubLabel setSelectable:YES];
     NSURL *githubURL = [NSURL URLWithString:@"https://github.com/danparsons/QuickHue"];
-    NSMutableAttributedString *githubStr = [[NSMutableAttributedString alloc] init];
+        NSMutableAttributedString *githubStr = [[NSMutableAttributedString alloc] init];
+    [githubStr appendAttributedString:[[NSAttributedString alloc] initWithString:@"Source on "]];
     [githubStr appendAttributedString:[NSAttributedString hyperlinkFromString:@"GitHub" withURL:githubURL]];
+    
     self.githubLabel.attributedStringValue = githubStr;
     [self.githubLabel sizeToFit];
     
