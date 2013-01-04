@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		30C0CF4C169695970052AB04 /* bulb-black.png in Resources */ = {isa = PBXBuildFile; fileRef = 30C0CF48169695970052AB04 /* bulb-black.png */; };
+		30C0CF4D169695970052AB04 /* bulb-black@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 30C0CF49169695970052AB04 /* bulb-black@2x.png */; };
+		30C0CF4E169695970052AB04 /* bulb-white.png in Resources */ = {isa = PBXBuildFile; fileRef = 30C0CF4A169695970052AB04 /* bulb-white.png */; };
+		30C0CF4F169695970052AB04 /* bulb-white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 30C0CF4B169695970052AB04 /* bulb-white@2x.png */; };
 		373B600F1682D7D700E07569 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 373B600E1682D7D700E07569 /* Cocoa.framework */; };
 		373B60191682D7D700E07569 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 373B60171682D7D700E07569 /* InfoPlist.strings */; };
 		373B601B1682D7D700E07569 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 373B601A1682D7D700E07569 /* main.m */; };
@@ -33,6 +37,10 @@
 
 /* Begin PBXFileReference section */
 		2A22B7CA18F1463E9D41C163 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		30C0CF48169695970052AB04 /* bulb-black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bulb-black.png"; path = "Images/bulb-black.png"; sourceTree = "<group>"; };
+		30C0CF49169695970052AB04 /* bulb-black@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bulb-black@2x.png"; path = "Images/bulb-black@2x.png"; sourceTree = "<group>"; };
+		30C0CF4A169695970052AB04 /* bulb-white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bulb-white.png"; path = "Images/bulb-white.png"; sourceTree = "<group>"; };
+		30C0CF4B169695970052AB04 /* bulb-white@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bulb-white@2x.png"; path = "Images/bulb-white@2x.png"; sourceTree = "<group>"; };
 		373B600A1682D7D700E07569 /* QuickHue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickHue.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		373B600E1682D7D700E07569 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		373B60111682D7D700E07569 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -185,6 +193,10 @@
 		373B60BA168576D000E07569 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				30C0CF48169695970052AB04 /* bulb-black.png */,
+				30C0CF49169695970052AB04 /* bulb-black@2x.png */,
+				30C0CF4A169695970052AB04 /* bulb-white.png */,
+				30C0CF4B169695970052AB04 /* bulb-white@2x.png */,
 				37F4DFF91686E65900D508D5 /* checkmark.png */,
 				37F4DFFA1686E65900D508D5 /* checkmark@2x.png */,
 				37F4DFF71686935300D508D5 /* appicon.icns */,
@@ -256,6 +268,10 @@
 				37F4DFF81686935300D508D5 /* appicon.icns in Resources */,
 				37F4DFFB1686E65900D508D5 /* checkmark.png in Resources */,
 				37F4DFFC1686E65900D508D5 /* checkmark@2x.png in Resources */,
+				30C0CF4C169695970052AB04 /* bulb-black.png in Resources */,
+				30C0CF4D169695970052AB04 /* bulb-black@2x.png in Resources */,
+				30C0CF4E169695970052AB04 /* bulb-white.png in Resources */,
+				30C0CF4F169695970052AB04 /* bulb-white@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

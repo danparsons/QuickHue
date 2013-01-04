@@ -16,6 +16,7 @@
 
 NSString *const QuickHueAPIUsernamePrefKey = @"QuickHueAPIUsernamePrefKey";
 NSString *const QuickHueHostPrefKey = @"QuickHueHostPrefKey";
+NSString *const QuickHueUseBlackAndWhiteMenuBarIconsKey = @"QuickHueUseBlackAndWhiteMenuBarIcons";
 
 @interface DPQuickHuePrefsViewController ()
 @property (nonatomic, strong) DPHueDiscover *dhd;
@@ -74,6 +75,8 @@ void updateLaunchAtLoginCheckboxFunc(LSSharedFileListRef inList, void *context) 
     [self.githubLabel sizeToFit];
     
     self.versionLabel.stringValue = [NSString stringWithFormat:@"QuickHue v%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]];
+
+    self.useBlackAndWhiteMenuBarIconsCheckbox.state = [[NSUserDefaults standardUserDefaults] boolForKey:QuickHueUseBlackAndWhiteMenuBarIconsKey];
 }
 
 - (void)addLoginItem {
@@ -258,6 +261,22 @@ void updateLaunchAtLoginCheckboxFunc(LSSharedFileListRef inList, void *context) 
         [self addLoginItem];
     else
         [self deleteLoginItem];
+}
+
+- (IBAction)useBlackAndWhiteMenuBarIconsClicked:(id)sender {
+    if(self.useBlackAndWhiteMenuBarIconsCheckbox.state) {
+        self.statusItem.image = [NSImage imageNamed:@"bulb-black"];
+        self.statusItem.alternateImage = [NSImage imageNamed:@"bulb-white"];
+    } else {
+        self.statusItem.image = [NSImage imageNamed:@"bulb"];
+        self.statusItem.alternateImage = [NSImage imageNamed:@"bulb"];
+    }
+
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+    [defaults setBool:self.useBlackAndWhiteMenuBarIconsCheckbox.state forKey:QuickHueUseBlackAndWhiteMenuBarIconsKey];
+
+    [defaults synchronize];
 }
 
 - (void)autosetRemovePresetButtonState {
