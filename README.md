@@ -28,3 +28,16 @@ Caveats
 =======
 * QuickHue doesn't allow you to edit presets. It can only copy the current state of your Hue system to a preset. For actually editing the current state of your Hue system, you must use the Hue iOS / Android apps. I don't personally edit presets much; I created the few I wanted when I first set the system up, using the iOS app. But I switch between them frequently and was annoyed at having to pull my iPhone out of my pocket every time I wanted to change presets. I may add preset editing in the future. The DPHue library I wrote already has the necessary support.
 * The Hue controller can only handle about 30 requests in rapid succession before it starts rate limiting, which it does by responding to all requests with HTTP 503. Additionally, each lamp requires a separate request. This means that if you change presets too quickly, lamps may take a while to change, and the Hue controller may start ignoring you. So if you try to apply a preset and it doesn't work, wait a little bit and try again.
+
+Building
+========
+Want to build QuickHue? First, install Xcode via the Mac App Store, then run these commands in your terminal:
+
+1. Install CocoaPods if you haven't already: sudo gem install cocoapods; pod setup
+2. Clone the QuickHue repository: git clone https://github.com/danparsons/QuickHue
+3. Resolve QuickHue's CocoaPod dependencies: cd QuickHue; pod install
+4. Open the QuickHue Xcode Workspace document (NOT the Xcode project): open QuickHue.xcworkspace
+5. Change the build target to QuickHue: In Xcode, to the right of the Stop button, click the dropdown and choose QuickHue.
+6. Click Run.
+
+That's it!
