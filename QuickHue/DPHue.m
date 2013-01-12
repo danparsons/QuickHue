@@ -65,7 +65,7 @@
 }
 
 + (NSString *)generateUsername {
-    return [[[NSHost currentHost] name] MD5String];
+    return [[[NSProcessInfo processInfo] globallyUniqueString] MD5String];
 }
 
 - (NSString *)description {
