@@ -153,7 +153,7 @@ void updateLaunchAtLoginCheckboxFunc(LSSharedFileListRef inList, void *context) 
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     [self.delegate buildMenu];
     [self.presetsTableView reloadData];
-    preset.hue = [[DPHue alloc] initWithHueIP:[prefs objectForKey:QuickHueHostPrefKey] username:[prefs objectForKey:QuickHueAPIUsernamePrefKey]];
+    preset.hue = [[DPHue alloc] initWithHueHost:[prefs objectForKey:QuickHueHostPrefKey] username:[prefs objectForKey:QuickHueAPIUsernamePrefKey]];
     [preset.hue readWithCompletion:^(DPHue *hue, NSError *err) {
         [presetStore save];        
     }];
@@ -209,7 +209,7 @@ void updateLaunchAtLoginCheckboxFunc(LSSharedFileListRef inList, void *context) 
     NSString *host = timer.userInfo;
     WSLog(@"Attempting to create username at %@", host);
     [self.discoveryLog appendFormat:@"%@: Attempting to authenticate to %@\n", [NSDate date], host];
-    DPHue *someHue = [[DPHue alloc] initWithHueIP:host username:[[NSUserDefaults standardUserDefaults] objectForKey:QuickHueAPIUsernamePrefKey]];
+    DPHue *someHue = [[DPHue alloc] initWithHueHost:host username:[[NSUserDefaults standardUserDefaults] objectForKey:QuickHueAPIUsernamePrefKey]];
     [someHue readWithCompletion:^(DPHue *hue, NSError *err) {
         if (hue.authenticated) {
             [self.discoveryLog appendFormat:@"%@: Successfully authenticated\n", [NSDate date]];
@@ -237,7 +237,7 @@ void updateLaunchAtLoginCheckboxFunc(LSSharedFileListRef inList, void *context) 
 
 - (IBAction)triggerTouchlink:(id)sender {
     NSString *someHost = [[NSUserDefaults standardUserDefaults] objectForKey:QuickHueHostPrefKey];
-    self.touchlinkHue = [[DPHue alloc] initWithHueIP:someHost username:[[NSUserDefaults standardUserDefaults] objectForKey:QuickHueAPIUsernamePrefKey]];
+    self.touchlinkHue = [[DPHue alloc] initWithHueHost:someHost username:[[NSUserDefaults standardUserDefaults] objectForKey:QuickHueAPIUsernamePrefKey]];
     [self.touchlinkProgressIndicator startAnimation:self];
     [self.touchlinkProgressIndicator setHidden:NO];
     [self.touchlinkHue triggerTouchlinkWithCompletion:^(BOOL success, NSString *result) {
@@ -299,7 +299,7 @@ void updateLaunchAtLoginCheckboxFunc(LSSharedFileListRef inList, void *context) 
     [self.discoveryProgressIndicator startAnimation:self];
     [self.discoverySaveButton setEnabled:NO];
     self.discoveryStatusLabel.stringValue = @"Hue Found! Authenticating...";
-    DPHue *someHue = [[DPHue alloc] initWithHueIP:host username:[[NSUserDefaults standardUserDefaults] objectForKey:QuickHueAPIUsernamePrefKey]];
+    DPHue *someHue = [[DPHue alloc] initWithHueHost:host username:[[NSUserDefaults standardUserDefaults] objectForKey:QuickHueAPIUsernamePrefKey]];
     [someHue readWithCompletion:^(DPHue *hue, NSError *err) {
         self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(createUsernameAt:) userInfo:host repeats:YES];
     }];

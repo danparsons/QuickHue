@@ -1,10 +1,11 @@
 //
 //  DPHueDiscover.m
-//  QuickHue
+//  DPHue
 //
-//  Created by Dan Parsons on 12/21/12.
-//  Copyright (c) 2012 Dan Parsons. All rights reserved.
+//  This class is in the public domain.
+//  Originally created by Dan Parsons in 2012.
 //
+//  https://github.com/danparsons/DPHue
 
 #import <CocoaAsyncSocket/GCDAsyncUdpSocket.h>
 #import "DPHueDiscover.h"
@@ -29,7 +30,7 @@
 }
 
 - (void)discoverForDuration:(int)seconds withCompletion:(void (^)(NSMutableString *log))block {
-    WSLog(@"Starting discovery");
+    WSLog(@"Starting discovery, via meethue.com API first");
     [self.log appendFormat:@"%@: Starting disovery\n", [NSDate date]];
     NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.meethue.com/api/nupnp"]];
     DPHueNUPNP *pnp = [[DPHueNUPNP alloc] init];
@@ -44,7 +45,7 @@
                 [self.delegate foundHueAt:pnp.hueIP discoveryLog:self.log];
             }
         } else {
-            [self.log appendFormat:@"%@: Received response from web service, but no IP\n", [NSDate date]];
+            [self.log appendFormat:@"%@: Received response from web service, but no IP, starting SSDP discovery\n", [NSDate date]];
             [self startSSDPDiscovery];
         }
     };

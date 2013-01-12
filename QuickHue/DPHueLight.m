@@ -1,10 +1,11 @@
 //
 //  DPHueLight.m
-//  QuickHue
+//  DPHue
 //
-//  Created by Dan Parsons on 12/19/12.
-//  Copyright (c) 2012 Dan Parsons. All rights reserved.
+//  This class is in the public domain.
+//  Originally created by Dan Parsons in 2012.
 //
+//  https://github.com/danparsons/DPHue
 
 #import "DPHueLight.h"
 #import "DPJSONConnection.h"
@@ -19,8 +20,8 @@
 @property (nonatomic, readwrite) BOOL writeSuccess;
 @property (nonatomic, strong, readwrite) NSMutableString *writeMessage;
 @property (nonatomic, strong, readwrite) NSString *name;
-@property (nonatomic, strong, readwrite) NSURL *getURL;
-@property (nonatomic, strong, readwrite) NSURL *putURL;
+@property (nonatomic, strong, readwrite) NSURL *readURL;
+@property (nonatomic, strong, readwrite) NSURL *writeURL;
 
 @end
 
@@ -38,8 +39,8 @@
 - (NSString *)description {
     NSMutableString *descr = [[NSMutableString alloc] init];
     [descr appendFormat:@"Light Name: %@\n", self.name];
-    [descr appendFormat:@"\tgetURL: %@\n", self.getURL];
-    [descr appendFormat:@"\tputURL: %@\n", self.putURL];
+    [descr appendFormat:@"\tgetURL: %@\n", self.readURL];
+    [descr appendFormat:@"\tputURL: %@\n", self.writeURL];
     [descr appendFormat:@"\tNumber: %@\n", self.number];
     [descr appendFormat:@"\tType: %@\n", self.type];
     [descr appendFormat:@"\tVersion: %@\n", self.swversion];
@@ -58,11 +59,11 @@
 - (void)updateURLs {
     NSString *base = [NSString stringWithFormat:@"http://%@/api/%@/lights/%@",
                       self.host, self.username, self.number];
-    _getURL = [NSURL URLWithString:base];
-    _putURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/state", base]];
+    _readURL = [NSURL URLWithString:base];
+    _writeURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/state", base]];
 }
 
-#pragma mark - Setters that update getURL and putURL
+#pragma mark - Setters that update readURL and writeURL
 
 - (void)setNumber:(NSNumber *)number {
     _number = number;
@@ -103,7 +104,7 @@
         [self write];
 }
 
-// This is the closest I've ever come to accidentally naming a method "sexy"
+// This is the closest I've ever come to unintentionally naming a method "sexy"
 - (void)setXy:(NSArray *)xy {
     _xy = xy;
     self.pendingChanges[@"xy"] = xy;
@@ -126,7 +127,7 @@
 }
 
 - (void)read {
-    NSURLRequest *req = [NSURLRequest requestWithURL:self.getURL];
+    NSURLRequest *req = [NSURLRequest requestWithURL:self.readURL];
     DPJSONConnection *connection = [[DPJSONConnection alloc] initWithRequest:req];
     connection.jsonRootObject = self;
     [connection start];
@@ -166,13 +167,13 @@
     NSData *json = [NSJSONSerialization dataWithJSONObject:self.pendingChanges options:0 error:nil];
     NSString *pretty = [[NSString alloc] initWithData:json encoding:NSUTF8StringEncoding];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    request.URL = self.putURL;
+    request.URL = self.writeURL;
     request.HTTPMethod = @"PUT";
     request.HTTPBody = json;
     DPJSONConnection *connection = [[DPJSONConnection alloc] initWithRequest:request];
     connection.jsonRootObject = self;
     NSMutableString *msg = [[NSMutableString alloc] init];
-    [msg appendFormat:@"Writing to: %@\n", self.putURL];
+    [msg appendFormat:@"Writing to: %@\n", self.writeURL];
     [msg appendFormat:@"Writing values: %@\n", pretty];
     connection.completionBlock = ^(id obj, NSError *err) {
 #ifdef DEBUG
@@ -245,8 +246,8 @@
         _xy = [a decodeObjectForKey:@"xy"];
         _colorTemperature = [a decodeObjectForKey:@"colorTemperature"];
         _saturation = [a decodeObjectForKey:@"saturation"];
-        _getURL = [a decodeObjectForKey:@"getURL"];
-        _putURL = [a decodeObjectForKey:@"putURL"];
+        _readURL = [a decodeObjectForKey:@"getURL"];
+        _writeURL = [a decodeObjectForKey:@"putURL"];
         _number = [a decodeObjectForKey:@"number"];
         _host = [a decodeObjectForKey:@"host"];
         _username = [a decodeObjectForKey:@"username"];
@@ -267,8 +268,8 @@
     [a encodeObject:_xy forKey:@"xy"];
     [a encodeObject:_colorTemperature forKey:@"colorTemperature"];
     [a encodeObject:_saturation forKey:@"saturation"];
-    [a encodeObject:_getURL forKey:@"getURL"];
-    [a encodeObject:_putURL forKey:@"putURL"];
+    [a encodeObject:_readURL forKey:@"getURL"];
+    [a encodeObject:_writeURL forKey:@"putURL"];
     [a encodeObject:_number forKey:@"number"];
     [a encodeObject:_host forKey:@"host"];
     [a encodeObject:_username forKey:@"username"];

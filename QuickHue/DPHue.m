@@ -1,10 +1,11 @@
 //
 //  DPHue.m
-//  QuickHue
+//  DPHue
 //
-//  Created by Dan Parsons on 12/19/12.
-//  Copyright (c) 2012 Dan Parsons. All rights reserved.
+//  This class is in the public domain.
+//  Originally created by Dan Parsons in 2012.
 //
+//  https://github.com/danparsons/DPHue
 
 #import "DPHue.h"
 #import "DPHueLight.h"
@@ -15,8 +16,8 @@
 @interface DPHue ()
 @property (nonatomic, strong, readwrite) NSString *name;
 @property (nonatomic, strong, readwrite) NSString *deviceType;
-@property (nonatomic, strong, readwrite) NSURL *getURL;
-@property (nonatomic, strong, readwrite) NSURL *putURL;
+@property (nonatomic, strong, readwrite) NSURL *readURL;
+@property (nonatomic, strong, readwrite) NSURL *writeURL;
 @property (nonatomic, strong, readwrite) NSString *swversion;
 @property (nonatomic, strong, readwrite) NSArray *lights;
 @property (nonatomic, strong) GCDAsyncSocket *socket;
@@ -27,12 +28,11 @@
 
 @implementation DPHue
 
-- (id)initWithHueIP:(NSString *)host username:(NSString *)username {
+- (id)initWithHueHost:(NSString *)host username:(NSString *)username {
     self = [super init];
     if (self) {
         self.deviceType = @"QuickHue";
         self.authenticated = NO;
-        //self.username = @"3c24efdac3d8a40baeda32579444743f";
         self.host = host;
         self.username = username;
     }
@@ -40,8 +40,7 @@
 }
 
 - (void)readWithCompletion:(void (^)(DPHue *, NSError *))block {
-    NSURLRequest *req = [NSURLRequest requestWithURL:self.getURL];
-    //WSLog(@"Reading %@", self.getURL);
+    NSURLRequest *req = [NSURLRequest requestWithURL:self.readURL];
     DPJSONConnection *connection = [[DPJSONConnection alloc] initWithRequest:req];
     connection.completionBlock = block;
     connection.jsonRootObject = self;
@@ -73,6 +72,8 @@
     NSMutableString *descr = [[NSMutableString alloc] init];
     [descr appendFormat:@"Name: %@\n", self.name];
     [descr appendFormat:@"Version: %@\n", self.swversion];
+    [descr appendFormat:@"readURL: %@\n", self.readURL];
+    [descr appendFormat:@"writeURL: %@\n", self.writeURL];
     [descr appendFormat:@"Number of lights: %lu\n", self.lights.count];
     for (DPHueLight *light in self.lights) {
         [descr appendString:light.description];
@@ -100,9 +101,14 @@
         [light writeAll];
 }
 
+// Sets _readURL and _writeURL based on _hostname, for the
+// controller and all the lights managed by this controller.
 - (void)updateURLs {
-    _getURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/api/%@", self.host, self.username]];
-    _putURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/api/%@/config", self.host, self.username]];
+    _readURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/api/%@", self.host, self.username]];
+    _writeURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/api/%@/config", self.host, self.username]];
+    
+    // As each DPHueLight maintains its own access URLs, they
+    // too must be updated if URLs change.
     for (DPHueLight *light in self.lights) {
         light.host = self.host;
         light.username = self.username;
@@ -124,7 +130,7 @@
     self.socket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
     NSError *err = nil;
     if (![self.socket connectToHost:self.host onPort:30000 withTimeout:5 error:&err]) {
-        NSLog(@"Error connecting to %@:30000 %@", self.host, err);
+        WSLog(@"Error connecting to %@:30000 %@", self.host, err);
         return;
     }
     self.touchLightCompletionBlock = block;
@@ -188,10 +194,6 @@
     for (id lightItem in d[@"lights"]) {
         DPHueLight *light = [[DPHueLight alloc] init];
         [light readFromJSONDictionary:d[@"lights"][lightItem]];
-        /*NSString *getURLString = [NSString stringWithFormat:@"http://%@/api/%@/lights/%@", self.host, self.username, lightDict];
-        light.getURL = [NSURL URLWithString:getURLString];
-        light.putURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/state", getURLString]];
-        */
         NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
         f.numberStyle = NSNumberFormatterDecimalStyle;
         light.number = [f numberFromString:lightItem];
@@ -210,16 +212,16 @@
         _deviceType = @"QuickHue";
         _username = [a decodeObjectForKey:@"username"];
         _host = [a decodeObjectForKey:@"host"];
-        _getURL = [a decodeObjectForKey:@"getURL"];
-        _putURL = [a decodeObjectForKey:@"putURL"];
+        _readURL = [a decodeObjectForKey:@"getURL"];
+        _writeURL = [a decodeObjectForKey:@"putURL"];
         _lights = [a decodeObjectForKey:@"lights"];
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)a {
-    [a encodeObject:_getURL forKey:@"getURL"];
-    [a encodeObject:_putURL forKey:@"putURL"];
+    [a encodeObject:_readURL forKey:@"getURL"];
+    [a encodeObject:_writeURL forKey:@"putURL"];
     [a encodeObject:_host forKey:@"host"];
     [a encodeObject:_lights forKey:@"lights"];
     [a encodeObject:_username forKey:@"username"];

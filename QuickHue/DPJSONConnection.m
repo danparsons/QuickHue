@@ -1,10 +1,12 @@
 //
 //  DPJSONConnection.m
-//  QuickHue
+//  DPHue
 //
-//  Created by Dan Parsons on 12/19/12.
-//  Copyright (c) 2012 Dan Parsons. All rights reserved.
+//  This class is in the public domain.
+//  Originally created by Dan Parsons in 2012.
 //
+//  https://github.com/danparsons/DPHue
+
 
 #import "DPJSONConnection.h"
 

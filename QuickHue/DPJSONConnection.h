@@ -1,10 +1,15 @@
 //
 //  DPJSONConnection.h
-//  QuickHue
+//  DPHue
 //
-//  Created by Dan Parsons on 12/19/12.
-//  Copyright (c) 2012 Dan Parsons. All rights reserved.
+//  This class is in the public domain.
+//  Originally created by Dan Parsons in 2012.
 //
+//  https://github.com/danparsons/DPHue
+
+// DPJSONConnection wraps NSURLConnection and optionally
+// decodes JSON into a supplied object if it conforms to
+// the DPJSONSerializable protocol
 
 #import <Foundation/Foundation.h>
 #import "DPJSONSerializable.h"

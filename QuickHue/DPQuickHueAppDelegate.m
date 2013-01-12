@@ -92,7 +92,7 @@ extern NSString * const QuickHueUseBlackAndWhiteMenuBarIconsKey;
     DPQuickHuePresetStore *presetStore = [DPQuickHuePresetStore sharedStore];
     DPQuickHuePreset *preset = [presetStore createPreset];
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    preset.hue = [[DPHue alloc] initWithHueIP:[prefs objectForKey:QuickHueHostPrefKey] username:[prefs objectForKey:QuickHueAPIUsernamePrefKey]];
+    preset.hue = [[DPHue alloc] initWithHueHost:[prefs objectForKey:QuickHueHostPrefKey] username:[prefs objectForKey:QuickHueAPIUsernamePrefKey]];
     [self.pvc.presetsTableView reloadData];
     [preset.hue readWithCompletion:^(DPHue *hue, NSError *err) {
         [presetStore save];
@@ -102,7 +102,7 @@ extern NSString * const QuickHueUseBlackAndWhiteMenuBarIconsKey;
 
 - (void)allOn {
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    DPHue *someHue = [[DPHue alloc] initWithHueIP:[prefs objectForKey:QuickHueHostPrefKey] username:[prefs objectForKey:QuickHueAPIUsernamePrefKey]];
+    DPHue *someHue = [[DPHue alloc] initWithHueHost:[prefs objectForKey:QuickHueHostPrefKey] username:[prefs objectForKey:QuickHueAPIUsernamePrefKey]];
     [someHue readWithCompletion:^(DPHue *hue, NSError *err) {
         [hue allLightsOn];
     }];
@@ -110,7 +110,7 @@ extern NSString * const QuickHueUseBlackAndWhiteMenuBarIconsKey;
 
 - (void)allOff {
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    DPHue *someHue = [[DPHue alloc] initWithHueIP:[prefs objectForKey:QuickHueHostPrefKey] username:[prefs objectForKey:QuickHueAPIUsernamePrefKey]];
+    DPHue *someHue = [[DPHue alloc] initWithHueHost:[prefs objectForKey:QuickHueHostPrefKey] username:[prefs objectForKey:QuickHueAPIUsernamePrefKey]];
     [someHue readWithCompletion:^(DPHue *hue, NSError *err) {
         [hue allLightsOff];
     }];
@@ -134,7 +134,11 @@ extern NSString * const QuickHueUseBlackAndWhiteMenuBarIconsKey;
 }
 
 - (void)debug1 {
-
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    DPHue *someHue = [[DPHue alloc] initWithHueHost:[prefs objectForKey:QuickHueHostPrefKey] username:[prefs objectForKey:QuickHueAPIUsernamePrefKey]];
+    [someHue readWithCompletion:^(DPHue *hue, NSError *err) {
+        NSLog(@"%@", someHue);
+    }];
 }
 
 #pragma mark - DPHueDiscoverDelegate

@@ -1,13 +1,14 @@
 //
 //  WSLog.h
-//  QuickHue
+//  DPHue
 //
-//  Created by Dan Parsons on 12/16/12.
-//  Copyright (c) 2012 Dan Parsons. All rights reserved.
+//  This is in the public domain.
+//  Originally created by Dan Parsons in 2012.
 //
+//  https://github.com/danparsons/QuickHue
 
-#ifndef Nerdfeed_WSLog_h
-#define Nerdfeed_WSLog_h
+#ifndef WSLog_h
+#define WSLog_h
 
 #ifdef DEBUG
 #define WSLog(...) NSLog(__VA_ARGS__)

@@ -1,10 +1,12 @@
 //
 //  NSString+MD5.m
-//  QuickHue
+//  DPHue
 //
-//  Created by Dan Parsons on 12/21/12.
-//  Copyright (c) 2012 Dan Parsons. All rights reserved.
+//  This category is in the public domain.
+//  Originally created by Dan Parsons in 2012.
 //
+//  https://github.com/danparsons/DPHue
+
 
 #import <CommonCrypto/CommonDigest.h>
 #import "NSString+MD5.h"
