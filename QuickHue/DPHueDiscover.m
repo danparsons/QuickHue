@@ -11,6 +11,7 @@
 #import "DPHueDiscover.h"
 #import "DPJSONConnection.h"
 #import "DPHueNUPNP.h"
+#import "WSLog.h"
 
 @interface DPHueDiscover ()
 @property (nonatomic, strong) GCDAsyncUdpSocket *udpSocket;

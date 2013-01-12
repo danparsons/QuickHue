@@ -11,6 +11,7 @@
 #import "DPHueLight.h"
 #import "DPJSONConnection.h"
 #import "NSString+MD5.h"
+#import "WSLog.h"
 #import <CocoaAsyncSocket/GCDAsyncSocket.h>
 
 @interface DPHue ()
@@ -74,7 +75,7 @@
     [descr appendFormat:@"Version: %@\n", self.swversion];
     [descr appendFormat:@"readURL: %@\n", self.readURL];
     [descr appendFormat:@"writeURL: %@\n", self.writeURL];
-    [descr appendFormat:@"Number of lights: %lu\n", self.lights.count];
+    [descr appendFormat:@"Number of lights: %lu\n", (unsigned long)self.lights.count];
     for (DPHueLight *light in self.lights) {
         [descr appendString:light.description];
         [descr appendString:@"\n"];
