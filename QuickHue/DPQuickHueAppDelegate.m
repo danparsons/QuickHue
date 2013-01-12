@@ -134,11 +134,7 @@ extern NSString * const QuickHueUseBlackAndWhiteMenuBarIconsKey;
 }
 
 - (void)debug1 {
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    DPHue *someHue = [[DPHue alloc] initWithHueHost:[prefs objectForKey:QuickHueHostPrefKey] username:[prefs objectForKey:QuickHueAPIUsernamePrefKey]];
-    [someHue readWithCompletion:^(DPHue *hue, NSError *err) {
-        NSLog(@"%@", someHue);
-    }];
+    NSLog(@"%@", [DPHue generateUsername]);
 }
 
 #pragma mark - DPHueDiscoverDelegate
