@@ -16,18 +16,12 @@
 		373B601B1682D7D700E07569 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 373B601A1682D7D700E07569 /* main.m */; };
 		373B60221682D7D700E07569 /* DPQuickHueAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 373B60211682D7D700E07569 /* DPQuickHueAppDelegate.m */; };
 		373B60361682E1FB00E07569 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 373B60351682E1FB00E07569 /* MainMenu.xib */; };
-		373B603F1682E41300E07569 /* DPHue.m in Sources */ = {isa = PBXBuildFile; fileRef = 373B60381682E41200E07569 /* DPHue.m */; };
-		373B60401682E41300E07569 /* DPHueLight.m in Sources */ = {isa = PBXBuildFile; fileRef = 373B603A1682E41200E07569 /* DPHueLight.m */; };
-		373B60411682E41300E07569 /* DPJSONConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 373B603C1682E41200E07569 /* DPJSONConnection.m */; };
 		373B60441682E43900E07569 /* DPQuickHuePreset.m in Sources */ = {isa = PBXBuildFile; fileRef = 373B60431682E43900E07569 /* DPQuickHuePreset.m */; };
 		373B60531682F93C00E07569 /* DPQuickHuePresetStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 373B60521682F93C00E07569 /* DPQuickHuePresetStore.m */; };
-		373B60621685175A00E07569 /* DPHueDiscover.m in Sources */ = {isa = PBXBuildFile; fileRef = 373B60611685175A00E07569 /* DPHueDiscover.m */; };
-		373B607F16855FE100E07569 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 373B607E16855FE100E07569 /* NSString+MD5.m */; };
 		373B60B81685721C00E07569 /* DPQuickHuePrefsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 373B60B61685721C00E07569 /* DPQuickHuePrefsViewController.m */; };
 		373B60B91685721C00E07569 /* DPQuickHuePrefsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 373B60B71685721C00E07569 /* DPQuickHuePrefsViewController.xib */; };
 		373B60E816868F1B00E07569 /* bulb.png in Resources */ = {isa = PBXBuildFile; fileRef = 373B60E616868F1A00E07569 /* bulb.png */; };
 		373B60E916868F1B00E07569 /* bulb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 373B60E716868F1B00E07569 /* bulb@2x.png */; };
-		37AADDE6168D08EC0043F9FF /* DPHueNUPNP.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AADDE5168D08EC0043F9FF /* DPHueNUPNP.m */; };
 		37F4DFF81686935300D508D5 /* appicon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 37F4DFF71686935300D508D5 /* appicon.icns */; };
 		37F4DFFB1686E65900D508D5 /* checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 37F4DFF91686E65900D508D5 /* checkmark.png */; };
 		37F4DFFC1686E65900D508D5 /* checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37F4DFFA1686E65900D508D5 /* checkmark@2x.png */; };
@@ -53,29 +47,16 @@
 		373B60201682D7D700E07569 /* DPQuickHueAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DPQuickHueAppDelegate.h; sourceTree = "<group>"; };
 		373B60211682D7D700E07569 /* DPQuickHueAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DPQuickHueAppDelegate.m; sourceTree = "<group>"; };
 		373B60351682E1FB00E07569 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
-		373B60371682E41200E07569 /* DPHue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPHue.h; sourceTree = "<group>"; };
-		373B60381682E41200E07569 /* DPHue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPHue.m; sourceTree = "<group>"; };
-		373B60391682E41200E07569 /* DPHueLight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPHueLight.h; sourceTree = "<group>"; };
-		373B603A1682E41200E07569 /* DPHueLight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPHueLight.m; sourceTree = "<group>"; };
-		373B603B1682E41200E07569 /* DPJSONConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPJSONConnection.h; sourceTree = "<group>"; };
-		373B603C1682E41200E07569 /* DPJSONConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPJSONConnection.m; sourceTree = "<group>"; };
-		373B603D1682E41200E07569 /* DPJSONSerializable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPJSONSerializable.h; sourceTree = "<group>"; };
 		373B603E1682E41200E07569 /* WSLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSLog.h; sourceTree = "<group>"; };
 		373B60421682E43900E07569 /* DPQuickHuePreset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPQuickHuePreset.h; sourceTree = "<group>"; };
 		373B60431682E43900E07569 /* DPQuickHuePreset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPQuickHuePreset.m; sourceTree = "<group>"; };
 		373B60511682F93C00E07569 /* DPQuickHuePresetStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPQuickHuePresetStore.h; sourceTree = "<group>"; };
 		373B60521682F93C00E07569 /* DPQuickHuePresetStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPQuickHuePresetStore.m; sourceTree = "<group>"; };
-		373B60601685175A00E07569 /* DPHueDiscover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPHueDiscover.h; sourceTree = "<group>"; };
-		373B60611685175A00E07569 /* DPHueDiscover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPHueDiscover.m; sourceTree = "<group>"; };
-		373B607D16855FE100E07569 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
-		373B607E16855FE100E07569 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
 		373B60B51685721C00E07569 /* DPQuickHuePrefsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPQuickHuePrefsViewController.h; sourceTree = "<group>"; };
 		373B60B61685721C00E07569 /* DPQuickHuePrefsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPQuickHuePrefsViewController.m; sourceTree = "<group>"; };
 		373B60B71685721C00E07569 /* DPQuickHuePrefsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DPQuickHuePrefsViewController.xib; sourceTree = "<group>"; };
 		373B60E616868F1A00E07569 /* bulb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bulb.png; path = Images/bulb.png; sourceTree = "<group>"; };
 		373B60E716868F1B00E07569 /* bulb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bulb@2x.png"; path = "Images/bulb@2x.png"; sourceTree = "<group>"; };
-		37AADDE4168D08EC0043F9FF /* DPHueNUPNP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPHueNUPNP.h; sourceTree = "<group>"; };
-		37AADDE5168D08EC0043F9FF /* DPHueNUPNP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPHueNUPNP.m; sourceTree = "<group>"; };
 		37E4E975168691BE002ECCB8 /* appicon.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; name = appicon.iconset; path = Images/appicon.iconset; sourceTree = "<group>"; };
 		37F4DFF71686935300D508D5 /* appicon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = appicon.icns; path = ../appicon.icns; sourceTree = "<group>"; };
 		37F4DFF91686E65900D508D5 /* checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = checkmark.png; path = Images/checkmark.png; sourceTree = "<group>"; };
@@ -139,7 +120,6 @@
 			isa = PBXGroup;
 			children = (
 				373B60BA168576D000E07569 /* Images */,
-				373B60631685176800E07569 /* DPHue */,
 				373B60351682E1FB00E07569 /* MainMenu.xib */,
 				373B60511682F93C00E07569 /* DPQuickHuePresetStore.h */,
 				373B60521682F93C00E07569 /* DPQuickHuePresetStore.m */,
@@ -168,26 +148,6 @@
 				373B601C1682D7D700E07569 /* QuickHue-Prefix.pch */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		373B60631685176800E07569 /* DPHue */ = {
-			isa = PBXGroup;
-			children = (
-				373B607D16855FE100E07569 /* NSString+MD5.h */,
-				373B607E16855FE100E07569 /* NSString+MD5.m */,
-				373B603B1682E41200E07569 /* DPJSONConnection.h */,
-				373B603C1682E41200E07569 /* DPJSONConnection.m */,
-				373B603D1682E41200E07569 /* DPJSONSerializable.h */,
-				373B60371682E41200E07569 /* DPHue.h */,
-				373B60381682E41200E07569 /* DPHue.m */,
-				373B60391682E41200E07569 /* DPHueLight.h */,
-				373B603A1682E41200E07569 /* DPHueLight.m */,
-				373B60601685175A00E07569 /* DPHueDiscover.h */,
-				373B60611685175A00E07569 /* DPHueDiscover.m */,
-				37AADDE4168D08EC0043F9FF /* DPHueNUPNP.h */,
-				37AADDE5168D08EC0043F9FF /* DPHueNUPNP.m */,
-			);
-			name = DPHue;
 			sourceTree = "<group>";
 		};
 		373B60BA168576D000E07569 /* Images */ = {
@@ -301,16 +261,10 @@
 			files = (
 				373B601B1682D7D700E07569 /* main.m in Sources */,
 				373B60221682D7D700E07569 /* DPQuickHueAppDelegate.m in Sources */,
-				373B603F1682E41300E07569 /* DPHue.m in Sources */,
-				373B60401682E41300E07569 /* DPHueLight.m in Sources */,
-				373B60411682E41300E07569 /* DPJSONConnection.m in Sources */,
 				373B60441682E43900E07569 /* DPQuickHuePreset.m in Sources */,
 				373B60531682F93C00E07569 /* DPQuickHuePresetStore.m in Sources */,
-				373B60621685175A00E07569 /* DPHueDiscover.m in Sources */,
-				373B607F16855FE100E07569 /* NSString+MD5.m in Sources */,
 				373B60B81685721C00E07569 /* DPQuickHuePrefsViewController.m in Sources */,
 				37F4E0031686FD8600D508D5 /* NSAttributedString+Hyperlink.m in Sources */,
-				37AADDE6168D08EC0043F9FF /* DPHueNUPNP.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

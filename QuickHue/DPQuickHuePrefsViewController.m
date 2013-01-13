@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 Dan Parsons. All rights reserved.
 //
 
+#import <DPHue/DPHue.h>
+#import <DPHue/DPHueDiscover.h>
 #import "DPQuickHuePrefsViewController.h"
-#import "DPHueDiscover.h"
-#import "DPHue.h"
 #import "DPQuickHuePresetStore.h"
 #import "DPQuickHuePreset.h"
 #import "DPQuickHueAppDelegate.h"

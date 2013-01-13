@@ -1,2 +1,2 @@
 platform :osx
-pod 'CocoaAsyncSocket', '~> 0.0.1'
+pod 'DPHue', '~> 0.0.1'

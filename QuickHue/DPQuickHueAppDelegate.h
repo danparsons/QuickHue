@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "DPHueDiscover.h"
+#import <DPHue/DPHueDiscover.h>
 
 @interface DPQuickHueAppDelegate : NSObject <NSApplicationDelegate, DPHueDiscoverDelegate>
 

@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DPHue.h"
+#import <DPHue/DPHue.h>
 
 @interface DPQuickHuePreset : NSObject <NSCoding>
 

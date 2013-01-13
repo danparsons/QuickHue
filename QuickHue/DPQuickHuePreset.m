@@ -6,8 +6,8 @@
 //  Copyright (c) 2012 Dan Parsons. All rights reserved.
 //
 
+#import <DPHue/DPHue.h>
 #import "DPQuickHuePreset.h"
-#import "DPHue.h"
 
 @implementation DPQuickHuePreset
 
