@@ -22,7 +22,8 @@ Features
 * Quickly change entire Hue state from OS X menu bar
 * Supports an infinite number of Hue lamps (effectively limited by the maximum 50 lamps supported by the Hue controller)
 * Autodiscovery of Hue controller
-* Completely asynchronous - the Hue API requires separate requests for each lamp which some control software implement in a blocking, serial fashion. QuickHue uses the DPHue library, which executes multiple requests simultaneously and asynchronously, effecting rapid and reliable state changes.
+* Completely asynchronous - the Hue API requires separate requests for each lamp which some control software implement in a blocking, serial fashion. QuickHue uses the [DPHue library](https://github.com/danparsons/DPHue), which executes multiple requests simultaneously and asynchronously, effecting rapid and reliable state changes.
+
 
 Caveats
 =======
