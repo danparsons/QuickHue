@@ -85,6 +85,9 @@ extern NSString * const QuickHueUseBlackAndWhiteMenuBarIconsKey;
 
 - (void)applyPreset:(id)sender {
     DPQuickHuePreset *preset = [sender representedObject];
+    // Set IP & username to the one from NSUserDefaults, in case controller IP has changed since preset was made
+    preset.hue.host = [[NSUserDefaults standardUserDefaults] objectForKey:QuickHueHostPrefKey];
+    preset.hue.username = [[NSUserDefaults standardUserDefaults] objectForKey:QuickHueAPIUsernamePrefKey];
     [preset.hue writeAll];
 }
 
