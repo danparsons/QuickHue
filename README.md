@@ -29,6 +29,7 @@ Caveats
 =======
 * QuickHue doesn't allow you to edit presets. It can only copy the current state of your Hue system to a preset. For actually editing the current state of your Hue system, you must use the Hue iOS / Android apps. I don't personally edit presets much; I created the few I wanted when I first set the system up, using the iOS app. But I switch between them frequently and was annoyed at having to pull my iPhone out of my pocket every time I wanted to change presets. I may add preset editing in the future. The DPHue library I wrote already has the necessary support.
 * The Hue controller can only handle about 30 requests in rapid succession before it starts rate limiting, which it does by responding to all requests with HTTP 503. Additionally, each lamp requires a separate request. This means that if you change presets too quickly, lamps may take a while to change, and the Hue controller may start ignoring you. So if you try to apply a preset and it doesn't work, wait a little bit and try again.
+* QuickHue very likely requires OS X 10.8 Mountain Lion.
 
 Building
 ========
