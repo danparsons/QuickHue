@@ -17,6 +17,16 @@ Download
 Prebuilt QuickHue.app available here:
 https://github.com/danparsons/QuickHue/raw/master/QuickHue.zip
 
+Installation Through Homebrew
+=============================
+
+QuickHue is available through
+[homebrew](https://github.com/mxcl/homebrew) when [homebrew
+cask](https://github.com/phinze/homebrew-cask) is installed.  QuickHue
+can be installed with this command:
+
+`brew cask install quick-hue`
+
 Features
 ========
 * Quickly change entire Hue state from OS X menu bar
