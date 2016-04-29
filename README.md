@@ -25,7 +25,7 @@ QuickHue is available through
 cask](https://github.com/phinze/homebrew-cask) is installed.  QuickHue
 can be installed with this command:
 
-`brew cask install quick-hue`
+`brew cask install quickhue`
 
 Features
 ========
