@@ -53,3 +53,4 @@ Want to build QuickHue? First, install Xcode via the Mac App Store, then run the
 6. Click Run.
 
 That's it!
+
